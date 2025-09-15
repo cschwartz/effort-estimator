@@ -1,0 +1,6 @@
+<%= turbo_stream.update Project.new, "" %>
+<%= turbo_stream.prepend "projects" do %>
+  <%= render @project %>
+<% end %>
+<%= turbo_stream.remove "empty" %>
+<%= render_turbo_stream_flash_messages %>

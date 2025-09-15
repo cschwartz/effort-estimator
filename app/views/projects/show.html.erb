@@ -1,0 +1,24 @@
+<div>
+  <%= breadcrumbs(@project) %>
+  <div class="project">
+    <%= page_header @project.title, actions: [{ 
+      label: "Edit", 
+      link: edit_project_path(@project), 
+      options: { data: { turbo_frame: dom_id(Project.new) } }
+    }, {
+      label: "Delete",
+      type: :button_to,
+      color: "btn-error"
+    }] %>
+    <div class="details bg-base-100 rounded-lg p-6">
+      <dl class="space-y-4">
+        <div class="property-row">
+          <dt class="text-sm font-medium text-base-content/70 block mb-1">Description</dt>
+          <dd class="description prose prose-sm max-w-none bg-base-200 rounded p-3">
+            <%= simple_format(@project.description) %>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>

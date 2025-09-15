@@ -1,0 +1,10 @@
+  <% flash.each do |flash_type, message| %>
+  <div
+    role="alert"
+    class="alert alert-vertical sm:alert-horizontal"
+    data-controller="removals"
+  >
+    <span><%= message %></span>
+    <button class="btn btn-sm btn-primary ml-auto" data-action="click->removals#remove">Done</button>
+  </div>
+<% end %>
