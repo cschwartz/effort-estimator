@@ -52,15 +52,15 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
-  gem 'rspec-rails'
-  gem 'cucumber-rails', require: false
-  gem 'database_cleaner-active_record'
+  gem "rspec-rails"
+  gem "cucumber-rails", require: false
+  gem "database_cleaner-active_record"
 end
 
 group :test do
-  gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'launchy'
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem "launchy"
 end
 
 group :development do
