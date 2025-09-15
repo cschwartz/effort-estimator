@@ -19,7 +19,7 @@ Then('I should see the project {string}') do |name|
   expect(page).to have_css("tr.project td.title", text: name)
 end
 
-Then('I should see no projects') do 
+Then('I should see no projects') do
   expect(page).to have_css("#projects #empty", text: "No existing projects")
 end
 

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-#
+
 # Uncomment this and change the path if necessary to include your own
 # components.
 # See https://github.com/heartcombo/simple_form#custom-components to know
@@ -13,17 +13,17 @@ SimpleForm.setup do |config|
   # wrapper, change the order or even add your own to the
   # stack. The options given below are used to wrap the
   # whole input.
-  config.wrappers :vertical_form, tag: 'div', class: 'form-control w-full mb-4' do |b|
+  config.wrappers :vertical_form, tag: "div", class: "form-control w-full mb-4" do |b|
     b.use :html5
     b.use :placeholder
-    b.wrapper tag: 'div', class: 'label' do |ba|
-      ba.use :label, class: 'label-text'
+    b.wrapper tag: "div", class: "label" do |ba|
+      ba.use :label, class: "label-text"
     end
-    b.use :input, class: 'input input-bordered w-full'
-    b.use :error, wrap_with: { tag: 'div', class: 'label' }
-    b.use :hint, wrap_with: { tag: 'div', class: 'label-text-alt' }
+    b.use :input, class: "input input-bordered w-full"
+    b.use :error, wrap_with: { tag: "div", class: "label" }
+    b.use :hint, wrap_with: { tag: "div", class: "label-text-alt" }
   end
-  
+
   config.wrappers :default, class: :input,
     hint_class: :field_with_hint, error_class: :field_with_errors, valid_class: :field_without_errors do |b|
     ## Extensions enabled by default
@@ -85,7 +85,7 @@ SimpleForm.setup do |config|
   config.boolean_style = :nested
 
   # Default class for buttons
-  config.button_class = 'btn'
+  config.button_class = "btn"
 
   # Method used to tidy up errors. Specify any Rails Array method.
   # :first lists the first message for each field.
@@ -96,7 +96,7 @@ SimpleForm.setup do |config|
   config.error_notification_tag = :div
 
   # CSS class to add for error notification helper.
-  config.error_notification_class = 'error_notification'
+  config.error_notification_class = "error_notification"
 
   # Series of attempts to detect a default label method for collection.
   # config.collection_label_methods = [ :to_label, :name, :title, :to_s ]
@@ -172,7 +172,7 @@ SimpleForm.setup do |config|
   # config.input_class = nil
 
   # Define the default class of the input wrapper of the boolean input.
-  config.boolean_label_class = 'checkbox'
+  config.boolean_label_class = "checkbox"
 
   # Defines if the default input wrapper class should be included in radio
   # collection wrappers.

@@ -31,23 +31,23 @@ module ApplicationHelper
     color = action[:color] || "btn-primary"
     size = action[:size] || "btn-md"
     options = action[:options] || {}
-    
+
     css_classes = "btn #{color} #{size}"
-    
+
     case type
     when :button_to
       method = options[:method] || :delete
       data = options[:data] || {}
       form_options = options[:form] || {}
-      
-      button_to label, link, 
+
+      button_to label, link,
         method: method,
         data: data,
         class: css_classes,
         form: form_options
     else
       existing_classes = options[:class] || ""
-      final_classes = [css_classes, existing_classes].join(" ").strip
+      final_classes = [ css_classes, existing_classes ].join(" ").strip
       link_options = options.merge(class: final_classes)
       link_to label, link, link_options
     end
@@ -57,16 +57,16 @@ module ApplicationHelper
 
   def breadcrumb_items(entity, current_page)
     items = []
-    
+
     if entity
       collection, collection_path = from_entity entity
-    
+
       unless current_page?(collection_path)
         items << content_tag(:li, link_to(collection.humanize, collection_path))
       else
         items << content_tag(:li, collection.humanize)
       end
-      
+
       if !(entity.is_a? Class) and entity.persisted?
         entity_path = url_for(entity)
         if current_page && !current_page?(entity_path)
@@ -76,11 +76,11 @@ module ApplicationHelper
         end
       end
     end
-    
+
     if current_page
       items << content_tag(:li, current_page)
     end
-    
+
     items
   end
 
