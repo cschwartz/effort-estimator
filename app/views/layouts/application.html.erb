@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="turbo-refresh-method" content="morph">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= yield :head %>
@@ -40,6 +41,16 @@
           <ul class="menu bg-base-200 rounded-box w-56">
             <li>
               <%= link_to "Projects", projects_path %>
+              <ul>
+                <% if @project&.persisted? %>
+                  <li>
+                    <%= link_to "Overview", @project %>
+                  </li>
+                  <li>
+                    <%= link_to "Effort Breakdown", project_efforts_path(@project) %>
+                  </li>
+                <% end %>
+              </ul>
             </li>
           </ul>
         </div>

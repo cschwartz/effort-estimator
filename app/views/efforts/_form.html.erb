@@ -1,0 +1,12 @@
+<%= simple_form_for [@project, @effort], wrapper: :vertical_form do |f| %>
+  <% if @effort.errors.any? %>
+    <div class="error-messages">
+      <%= @effort.errors.full_messages.to_sentence.capitalize %>
+    </div>
+  <% end %>
+  <%= f.input :title, input_html: { autofocus: true } %>
+  <%= f.input :description %>
+  <%= f.hidden_field :parent_id, value: @parent.nil? ? nil: @parent.id %>
+  <%= link_to "Cancel", project_efforts_path(@project), class: "btn btn-warning" %>
+  <%= f.submit class: "btn btn-secondary" %>
+<% end %>

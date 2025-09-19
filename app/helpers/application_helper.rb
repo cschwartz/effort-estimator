@@ -15,9 +15,7 @@ module ApplicationHelper
     content_tag :div, class: "header prose max-w-none" do
       content_tag :div, class: "flex justify-between items-baseline" do
         concat content_tag(:h1, title, class: "title mb-0")
-        unless actions.empty?
-          concat content_tag(:div, actions.map { |action| render_action(action) }.join.html_safe, class: "flex gap-2 not-prose")
-        end
+        concat content_tag(:div, actions.map { |action| render_action(action) }.join.html_safe, class: "flex gap-2 not-prose")
       end
     end
   end

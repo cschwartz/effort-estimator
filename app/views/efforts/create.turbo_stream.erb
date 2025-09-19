@@ -1,0 +1,9 @@
+<%= turbo_stream.replace "effort_tree" do %>
+  <ul id="effort_tree" class="space-y-1" data-controller="effort-tree">
+    <%= render partial: "effort_tree", locals: { efforts: @project.efforts.roots.includes(:children), level: 0 } %>
+  </ul>
+<% end %>
+<%= turbo_stream.replace "effort_details" do %>
+  <%= render @effort %>
+<% end %>
+<%= render_turbo_stream_flash_messages %>

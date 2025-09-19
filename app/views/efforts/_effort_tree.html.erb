@@ -1,0 +1,32 @@
+<% efforts.each do |effort| %>
+  <li class="effort-node animate-in fade-in duration-150">
+    <% if effort.children.any? %>
+      <details data-effort-id="<%= effort.id %>" class="group transition-all duration-200 ease-out">
+        <summary class="flex items-center justify-between p-2 rounded hover:bg-base-200 cursor-pointer transition-colors duration-150">
+          <div class="flex items-center space-x-2">
+            <svg class="w-4 h-4 text-base-content/70 transition-transform duration-150 details-icon group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+            <span class="effort-title text-left">
+              <%= link_to effort.title, project_effort_path(@project, effort) %>
+            </span>
+          </div>
+        </summary>
+        <ul class="ml-4 mt-2 space-y-1 animate-in slide-in-from-top-1 duration-200 ease-out">
+          <%= render partial: "effort_tree", locals: { efforts: effort.children, level: level + 1 } %>
+        </ul>
+      </details>
+    <% else %>
+      <div class="flex items-center justify-between p-2 rounded hover:bg-base-200 group transition-colors duration-150">
+        <div class="flex items-center space-x-2">
+          <svg class="w-4 h-4 text-base-content/50" fill="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="2"></circle>
+          </svg>
+          <span class="effort-title text-left">
+            <%= link_to effort.title, project_effort_path(@project, effort) %>
+          </span>
+        </div>
+      </div>
+    <% end %>
+  </li>
+<% end %>

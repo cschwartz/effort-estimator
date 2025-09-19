@@ -1,0 +1,14 @@
+<%= turbo_stream.replace "effort_tree" do %>
+  <ul id="effort_tree" class="space-y-1 animate-in fade-in duration-150" data-controller="effort-tree">
+    <%= render partial: "effort_tree", locals: { efforts: @project.efforts.roots.includes(:children), level: 0 } %>
+  </ul>
+<% end %>
+<%= turbo_stream.replace "effort_sidebar" do %>
+  <div class="flex items-center justify-center h-full text-base-content/50">
+    <div class="text-center">
+      <h3 class="text-lg font-medium mb-2">Effort deleted successfully</h3>
+      <p>Choose an effort from the tree to view or edit its details</p>
+    </div>
+  </div>
+<% end %>
+<%= render_turbo_stream_flash_messages %>

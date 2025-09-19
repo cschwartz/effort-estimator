@@ -71,5 +71,6 @@ group :development do
 end
 
 gem "simple_form", "~> 5.3"
+gem "closure_tree"
 
 gem "tailwindcss-ruby", "~> 4.1"
