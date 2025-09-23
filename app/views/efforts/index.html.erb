@@ -7,14 +7,14 @@
       options: { data: { turbo_frame: "effort_sidebar" } }
     }] %>
     <div class="grid grid-cols-12 gap-6 h-screen">
-      <!-- Left side: Effort Tree -->
       <div class="col-span-6 p-4 overflow-y-auto">
         <h3 class="text-lg font-semibold mb-4">Effort Structure</h3>
-        <ul id="effort_tree" class="space-y-1 animate-in fade-in duration-150" data-controller="effort-tree">
-          <%= render partial: "effort_tree", locals: { efforts: @efforts, level: 0 } %>
-        </ul>
+        <%= turbo_frame_tag "effort_tree" do %>
+          <ul class="space-y-4 effort-tree" data-controller="treesortable" data-treesortable-response-kind-value="turbo-stream" data-treesortable-resource-name-value="effort" data-treesortable-handle-value=".sort-handle" data-treesortable-group-value="effort-tree">
+            <%= render partial: "effort_tree", locals: { efforts: @efforts } %>
+          </ul>
+        <% end %>
       </div>
-      <!-- Right side: Effort Details/Form -->
       <div class="col-span-6 p-4">
         <%= turbo_frame_tag "effort_sidebar" do %>
           <% if @effort %>

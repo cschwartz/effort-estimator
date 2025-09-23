@@ -3,7 +3,7 @@
     <%= render partial: "effort_tree", locals: { efforts: @project.efforts.roots.includes(:children), level: 0 } %>
   </ul>
 <% end %>
-<%= turbo_stream.replace "effort_details" do %>
+<%= turbo_stream.replace "effort_sidebar" do %>
   <%= render @effort %>
 <% end %>
 <%= render_turbo_stream_flash_messages %>

@@ -1,4 +1,6 @@
 class EffortsController < ApplicationController
+  include TreePositioning
+
   before_action :set_project
   before_action :set_effort, only: [ :edit, :update, :destroy ]
 
@@ -61,7 +63,7 @@ class EffortsController < ApplicationController
   end
 
   def update
-    if @effort.update(effort_params)
+    if update_effort
       respond_to do |format|
         format.html { redirect_to project_efforts_path(@project), notice: "Effort was successfully updated." }
         format.turbo_stream { flash.now[:notice] = "Effort was successfully updated." }
@@ -84,6 +86,27 @@ class EffortsController < ApplicationController
 
   private
 
+  def update_effort
+    @effort.transaction do
+      if effort_params.key?(:parent_id) || effort_params.key?(:position)
+        new_parent_id = effort_params[:parent_id]
+        new_position = effort_params[:position].to_i
+
+        unless update_tree_position @effort, @project.efforts, new_position, new_parent_id, lambda { |parent_id| @project.efforts.find(parent_id) }
+          @effort.errors.add(:base, "Invalid effort position")
+          raise ActiveRecord::Rollback
+        end
+      end
+
+      other_params = effort_params.except(:parent_id, :position)
+
+      return true if other_params.empty?
+      @effort.update(other_params)
+    end
+  rescue ActiveRecord::Rollback
+    false
+  end
+
   def set_project
     @project = Project.find(params[:project_id])
   end
@@ -93,6 +116,6 @@ class EffortsController < ApplicationController
   end
 
   def effort_params
-    params.require(:effort).permit(:title, :description, :parent_id)
+    params.require(:effort).permit(:title, :description, :parent_id, :position)
   end
 end
