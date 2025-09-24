@@ -10,9 +10,7 @@
       <div class="col-span-6 p-4 overflow-y-auto">
         <h3 class="text-lg font-semibold mb-4">Effort Structure</h3>
         <%= turbo_frame_tag "effort_tree" do %>
-          <ul class="space-y-4 effort-tree" data-controller="treesortable" data-treesortable-response-kind-value="turbo-stream" data-treesortable-resource-name-value="effort" data-treesortable-handle-value=".sort-handle" data-treesortable-group-value="effort-tree">
-            <%= render partial: "effort_tree", locals: { efforts: @efforts } %>
-          </ul>
+          <%= render partial: "effort_tree", locals: { efforts: @efforts } %>
         <% end %>
       </div>
       <div class="col-span-6 p-4">
@@ -20,12 +18,7 @@
           <% if @effort %>
             <%= render @effort %>
           <% else %>
-            <div class="flex items-center justify-center h-full text-base-content/50">
-              <div class="text-center">
-                <h3 class="text-lg font-medium mb-2">Select an effort</h3>
-                <p>Choose an effort from the tree to view or edit its details</p>
-              </div>
-            </div>
+            <%= render partial: "empty_sidebar" %>
           <% end %>
         <% end %>
       </div>

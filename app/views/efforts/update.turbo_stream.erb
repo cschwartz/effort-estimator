@@ -1,7 +1,5 @@
 <%= turbo_stream.replace "effort_tree" do %>
-  <ul class="space-y-4 effort-tree" data-controller="treesortable" data-treesortable-response-kind-value="turbo-stream" data-treesortable-resource-name-value="effort" data-treesortable-handle-value=".sort-handle" data-treesortable-group-value="effort-tree">
-    <%= render partial: "effort_tree", locals: { efforts: @project.efforts.roots.includes(:children) } %>
-  </ul>
+  <%= render partial: "effort_tree", locals: { efforts: @project.efforts.roots.includes(:children) } %>
 <% end %>
 <%= turbo_stream.replace "effort_sidebar" do %>
   <%= render @effort %>

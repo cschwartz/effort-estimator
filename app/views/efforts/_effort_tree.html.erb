@@ -1,22 +1,3 @@
-<% efforts.each do |effort| %>
-  <li class="effort-node pu-4 pl-4" data-treesortable-update-url="<%= project_effort_path(@project, effort) %>" data-treesortable-id="<%= effort.id %>">
-    <div class="flex items-center gap-3">
-      <svg class="w-6 h-6 flex-shrink-0 text-primary" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-      </svg>
-      <%= link_to effort.title, project_effort_path(@project, effort), class: "flex-1 link link-hover text-base-content", data: { turbo_frame: "_top" }%>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="sort-handle w-6 h-6 flex-shrink-0 text-secondary">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
-      </svg>
-    </div>
-    <div class="flex gap-3">
-      <div class="w-6 flex-shrink-0"></div>
-      <ul class="effort-tree space-y-4 flex-1">
-        <% unless effort.children.empty? %>
-          <%= render partial: "effort_tree", locals: { efforts: effort.children } %>
-        <% end %>
-      </ul>
-    </div>
-  </li>
-</li>
-<% end %>
+<ul class="space-y-4 effort-tree" data-controller="treesortable" data-treesortable-response-kind-value="turbo-stream" data-treesortable-resource-name-value="effort" data-treesortable-handle-value=".sort-handle" data-treesortable-group-value="effort-tree">
+  <%= render partial: "effort_subtree", locals: { efforts: efforts } %>
+</ul>

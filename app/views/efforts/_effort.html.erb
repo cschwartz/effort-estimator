@@ -22,14 +22,7 @@
       <% if @is_edit %>
         <%= render partial: "form" %>
       <% else %>
-        <dl class="space-y-4">
-          <div class="property-row">
-            <dt class="text-sm font-medium text-base-content/70 block mb-1">Description</dt>
-            <dd class="description prose prose-sm max-w-none bg-base-200 rounded p-3">
-              <%= simple_format(@effort.description) %>
-            </dd>
-          </div>
-        </dl>
+        <%= render partial: "effort_details", locals: {effort: @effort}%>
       <% end %>
     </div>
   </div>

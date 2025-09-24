@@ -6,7 +6,10 @@ import { patch } from "@rails/request.js"
 export default class StimulusSortable extends Controller {
     static values = {
         resourceName: String,
-        groupName: String,
+        groupName: {
+            type: String,
+            default: "group",
+        },
         paramName: {
             type: String,
             default: "position",
@@ -19,12 +22,31 @@ export default class StimulusSortable extends Controller {
             type: String,
             default: "html",
         },
-        animation: Number,
+        animation: {
+            type: Number,
+            default: 150,
+        },
         handle: String,
+        ghostClass: {
+            type: String,
+            default: "ghost",
+        },
+        emptyInsertThreshold: {
+            type: Number,
+            default: 5,
+        },
+        swapThreshold: {
+            type: Number,
+            default: 0.65,
+        },
+        fallbackOnBody: {
+            type: Boolean,
+            default: true,
+        },
     }
 
     initialize() {
-        this.onUpdate = this.onUpdate.bind(this)
+        this.onEnd = this.onEnd.bind(this)
     }
 
     connect() {
@@ -43,7 +65,7 @@ export default class StimulusSortable extends Controller {
         this.sortables = [];
     }
 
-    async onUpdate(event) {
+    async onEnd(event) {
         const { item, to, newIndex } = event
         if (!item.dataset.treesortableUpdateUrl) return
 
@@ -62,22 +84,18 @@ export default class StimulusSortable extends Controller {
 
     get options() {
         return {
-            animation: this.animationValue || this.defaultOptions.animation,
-            handle: this.handleValue || this.defaultOptions.handle,
-            responseKind: this.responseKindValue || this.defaultOptions.responseKind,
-            group: this.groupValue || this.defaultOptions.group,
-            onEnd: this.onUpdate
+            animation: this.animationValue,
+            handle: this.handleValue,
+            responseKind: this.responseKindValue,
+            group: this.groupNameValue,
+            fallbackOnBody: this.fallbackOnBodyValue,
+            swapThreshold: this.swapThresholdValue,
+            emptyInsertThreshold: this.emptyInsertThresholdValue,
+            onEnd: this.onEnd,
+            ghostClass: this.ghostClassValue
         }
     }
 
-    get defaultOptions() {
-        return {
-            animation: 150,
-            handle: undefined,
-            responseKind: "html",
-            group: "group"
-        }
-    }
 
     get positionParamName() {
         return this.resourceNameValue ? `${this.resourceNameValue}[${this.paramNameValue}]` : this.paramNameValue

@@ -1,0 +1,33 @@
+<% efforts.each do |effort| %>
+  <li class="effort-node pu-4 pl-4" data-treesortable-update-url="<%= project_effort_path(@project, effort) %>" data-treesortable-id="<%= effort.id %>" data-controller="reveal">
+    <div class="flex items-center gap-3">
+      <% if effort.children.empty? %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 flex-shrink-0 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5-3.9 19.5m-2.1-19.5-3.9 19.5" />
+        </svg>
+      <% else %>
+        <button data-action="reveal#toggle" type="button">
+          <svg class="w-6 h-6 flex-shrink-0 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-reveal-target="item" >
+            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+          </svg>
+          <svg class="w-6 h-6 flex-shrink-0 text-primary hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-reveal-target="item" >
+            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
+      <% end %>
+      <%= link_to effort.title, project_effort_path(@project, effort), class: "flex-1 link link-hover text-base-content", data: { turbo_frame: "_top" }%>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="sort-handle w-6 h-6 flex-shrink-0 text-secondary">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+      </svg>
+    </div>
+    <div class="flex gap-3">
+      <div class="w-6 flex-shrink-0"></div>
+      <ul data-reveal-target="item" class="effort-tree space-y-4 flex-1">
+        <% unless effort.children.empty? %>
+          <%= render partial: "effort_subtree", locals: { efforts: effort.children } %>
+        <% end %>
+      </ul>
+    </div>
+  </li>
+</li>
+<% end %>
