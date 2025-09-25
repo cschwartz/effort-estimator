@@ -9,3 +9,5 @@ pin "@hotwired/stimulus", to: "@hotwired--stimulus.js" # @3.2.2
 pin "@rails/request.js", to: "@rails--request.js.js" # @0.0.12
 pin "sortablejs" # @1.15.6
 pin "@stimulus-components/reveal", to: "@stimulus-components--reveal.js" # @5.0.0
+pin "@stimulus-components/notification", to: "@stimulus-components--notification.js" # @3.0.0
+pin "stimulus-use" # @0.52.3

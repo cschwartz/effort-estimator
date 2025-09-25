@@ -10,7 +10,7 @@ export default class extends Controller {
       if (event.target.action?.includes("/efforts")) {
         const form = event.target
         const parentIdField = form.querySelector('input[name="parent_id"], input[id="effort_parent_id"]')
-        const parentId = parentIdField?.value || null
+        const parentId = parentIdField?.value || null
         this.saveExpandedState(parentId)
       }
     })
@@ -26,7 +26,7 @@ export default class extends Controller {
 
   saveExpandedState(parentId) {
     const expandedIds = []
-    if(parentId !== null) {
+    if (parentId !== null) {
       expandedIds.push(parentId)
     }
     const detailsElements = document.querySelectorAll("#effort_tree details[open]")

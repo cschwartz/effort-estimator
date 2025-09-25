@@ -70,8 +70,9 @@ class EffortsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render :edit, status: :unprocessable_content }
-        format.turbo_stream { render :edit, status: :unprocessable_content }
+        @efforts = @project.efforts.roots.includes(:children)
+        @is_edit = true
+        format.html { render :index, status: :unprocessable_content }
       end
     end
   end
@@ -88,6 +89,7 @@ class EffortsController < ApplicationController
 
   def update_effort
     @effort.transaction do
+      other_params = effort_params
       if effort_params.key?(:parent_id) || effort_params.key?(:position)
         new_parent_id = effort_params[:parent_id]
         new_position = effort_params[:position].to_i
@@ -96,9 +98,9 @@ class EffortsController < ApplicationController
           @effort.errors.add(:base, "Invalid effort position")
           raise ActiveRecord::Rollback
         end
+      else
+        other_params = effort_params
       end
-
-      other_params = effort_params.except(:parent_id, :position)
 
       return true if other_params.empty?
       @effort.update(other_params)

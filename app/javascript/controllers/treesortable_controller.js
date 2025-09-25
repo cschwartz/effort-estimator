@@ -76,10 +76,6 @@ export default class StimulusSortable extends Controller {
         data.append(this.positionParamName, newIndex)
 
         return await patch(item.dataset.treesortableUpdateUrl, { body: data, responseKind: this.responseKindValue })
-            .then(response => response.text)
-            .then(html => {
-                Turbo.renderStreamMessage(html)
-            })
     }
 
     get options() {
