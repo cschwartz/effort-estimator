@@ -45,18 +45,16 @@ When('I fill in the project form with the following properties') do |table|
   fill_in 'Description', with: properties['Description'] if properties.key?('Description')
 end
 
-When('I submit the form') do
-  if page.has_button?('Create Project')
-    click_button 'Create Project'
-  elsif page.has_button?('Update Project')
-    click_button 'Update Project'
-  else
-    click_button 'Submit'
-  end
+When('I create the project') do
+  click_button 'Create Project'
+end
+
+When('I update the project') do
+  click_button 'Update Project'
 end
 
 Then('I should see the error message {string}') do |error_message|
-  expect(page).to have_css("form .error-messages", text: error_message)
+  expect(page).to have_css("form .alert-error", text: error_message)
 end
 
 Then('I should not see the project {string}') do |project_name|

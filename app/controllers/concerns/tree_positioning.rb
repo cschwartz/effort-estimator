@@ -18,7 +18,7 @@ module TreePositioning
     root_siblings = nodes.roots.where.not(id: node.id).order(:position)
 
     if root_siblings.empty?
-      node.tap { |n| update(parent: nil, position: 0) }
+      node.tap { |n| n.update(parent: nil, position: 0) }
     else
       insert_at_position(node, root_siblings, position)
     end

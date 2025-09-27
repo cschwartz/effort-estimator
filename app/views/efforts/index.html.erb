@@ -4,22 +4,18 @@
     <%= page_header "Effort Breakdown", actions: [{
       label: "Add Root Effort",
       link: new_project_effort_path(@project),
-      options: { data: { turbo_frame: "effort_sidebar" } }
+      options: { data: { turbo_frame: "effort-sidebar" } }
     }] %>
     <div class="grid grid-cols-12 gap-6 h-screen">
       <div class="col-span-6 p-4 overflow-y-auto">
         <h3 class="text-lg font-semibold mb-4">Effort Structure</h3>
-        <%= turbo_frame_tag "effort_tree" do %>
-          <%= render partial: "effort_tree", locals: { efforts: @efforts } %>
-        <% end %>
+        <%= render partial: "effort_tree", locals: { efforts: @efforts } %>
       </div>
       <div class="col-span-6 p-4">
-        <%= turbo_frame_tag "effort_sidebar" do %>
-          <% if @effort %>
-            <%= render @effort %>
-          <% else %>
-            <%= render partial: "empty_sidebar" %>
-          <% end %>
+        <% if @effort %>
+          <%= render @effort %>
+        <% else %>
+          <%= render partial: "empty_sidebar" %>
         <% end %>
       </div>
     </div>

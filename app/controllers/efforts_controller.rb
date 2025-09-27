@@ -36,8 +36,9 @@ class EffortsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render :new, status: :unprocessable_content }
-        format.turbo_stream { render :new, status: :unprocessable_content }
+        @efforts = @project.efforts.roots.includes(:children)
+        @is_edit = true
+        format.html { render :index, status: :unprocessable_content }
       end
     end
   end

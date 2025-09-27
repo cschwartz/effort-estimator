@@ -49,7 +49,7 @@ Feature: Manage Projects
       And I fill in the project form with the following properties
         | Title       | My First Project                      |
         | Description | A sample project for testing purposes |
-      And I submit the form
+      And I create the project
       Then I should see a status message "Project was successfully created"
       And I should see the project "My First Project"
 
@@ -64,7 +64,7 @@ Feature: Manage Projects
       And I fill in the project form with the following properties
         | Title       |                           |
         | Description | A project without a title |
-      And I submit the form
+      And I create the project
       Then I should see the error message "Title can't be blank"
 
   Rule: Update projects
@@ -83,7 +83,7 @@ Feature: Manage Projects
       And I fill in the project form with the following properties
         | Title       | Updated Project Title |
         | Description | Updated description   |
-      And I submit the form
+      And I update the project
       Then I should see a status message "Project was successfully updated"
       And I should see project details including the title "Updated Project Title"
       And I should see project details including the description "Updated description"
@@ -102,7 +102,7 @@ Feature: Manage Projects
       And I fill in the project form with the following properties
         | Title       |                     |
         | Description | Updated description |
-      And I submit the form
+      And I update the project
       Then I should see the error message "Title can't be blank"
 
   Rule: Delete projects

@@ -1,9 +1,5 @@
   <%= simple_form_for project, wrapper: :vertical_form do |f| %>
-  <% if @project.errors.any? %>
-    <div class="error-messages">
-      <%= project.errors.full_messages.to_sentence.capitalize %>
-    </div>
-  <% end %>
+  <%= form_errors(project) %>
   <%= f.input :title, input_html: { autofocus: true } %>
   <%= f.input :description %>
   <%= link_to "Cancel", projects_path, class: "btn btn-warning" %>

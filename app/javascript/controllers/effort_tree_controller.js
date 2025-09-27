@@ -29,7 +29,7 @@ export default class extends Controller {
     if (parentId !== null) {
       expandedIds.push(parentId)
     }
-    const detailsElements = document.querySelectorAll("#effort_tree details[open]")
+    const detailsElements = document.querySelectorAll("#effort-tree details[open]")
 
     detailsElements.forEach(details => {
       const effortId = details.dataset.effortId
@@ -45,7 +45,7 @@ export default class extends Controller {
     const expandedIds = JSON.parse(sessionStorage.getItem("effort_tree_expanded") || "[]")
 
     expandedIds.forEach(effortId => {
-      const detailsElement = document.querySelector(`#effort_tree details[data-effort-id="${effortId}"]`)
+      const detailsElement = document.querySelector(`#effort-tree details[data-effort-id="${effortId}"]`)
       if (detailsElement) {
         detailsElement.open = true
       }

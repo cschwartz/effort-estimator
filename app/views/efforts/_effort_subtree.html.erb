@@ -7,10 +7,10 @@
         </svg>
       <% else %>
         <button data-action="reveal#toggle" type="button">
-          <svg class="w-6 h-6 flex-shrink-0 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-reveal-target="item" >
+          <svg class="w-6 h-6 flex-shrink-0 text-primary <%= @effort&.parent == effort ? '' : 'hidden' %>" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-reveal-target="item" >
             <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
           </svg>
-          <svg class="w-6 h-6 flex-shrink-0 text-primary hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-reveal-target="item" >
+          <svg class="w-6 h-6 flex-shrink-0 text-primary <%= @effort&.parent == effort ? 'hidden' : '' %>" fill="none" stroke="currentColor" viewBox="0 0 24 24" data-reveal-target="item" >
             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
           </svg>
         </button>
@@ -22,7 +22,7 @@
     </div>
     <div class="flex gap-3">
       <div class="w-6 flex-shrink-0"></div>
-      <ul data-reveal-target="item" class="effort-tree space-y-4 flex-1">
+      <ul data-reveal-target="item" class="effort-subtree space-y-4 flex-1 <%= ((@effort&.parent == effort) or effort.children.empty?) ? '' : 'hidden' %>">
         <% unless effort.children.empty? %>
           <%= render partial: "effort_subtree", locals: { efforts: effort.children } %>
         <% end %>
