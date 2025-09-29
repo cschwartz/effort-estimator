@@ -33,7 +33,7 @@ When('I expand the effort {string}') do |effort_title|
     effort_link = find("a", text: effort_title)
     effort_node = effort_link.ancestor(".effort-node", match: :first, order: :reverse)
     within(effort_node) do
-      toggle_button = find("button[data-action*='reveal#toggle']")
+      toggle_button = find("button[data-action*='reveal#toggle']", match: :first, order: :reverse)
       toggle_button.click
     end
   end
