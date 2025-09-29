@@ -25,10 +25,6 @@ class EffortsController < ApplicationController
   def create
     @effort = @project.efforts.build(effort_params)
 
-    if params[:parent_id].present?
-      @effort.parent = @project.efforts.find(params[:parent_id])
-    end
-
     if @effort.save
       respond_to do |format|
         format.html { redirect_to project_efforts_path(@project), notice: "Effort was successfully created." }

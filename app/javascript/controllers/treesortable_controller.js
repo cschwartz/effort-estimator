@@ -51,7 +51,10 @@ export default class StimulusSortable extends Controller {
 
     connect() {
         this.sortables = [];
-        document.querySelectorAll("ul").forEach((el) => {
+        this.sortables.push(new Sortable(this.element, {
+                ...this.options,
+            }));
+        this.element.querySelectorAll(".effort-subtree").forEach((el) => {
             this.sortables.push(new Sortable(el, {
                 ...this.options,
             }));

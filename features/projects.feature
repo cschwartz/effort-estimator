@@ -1,3 +1,4 @@
+@javascript
 Feature: Manage Projects
   As a user
   I want to manage projects

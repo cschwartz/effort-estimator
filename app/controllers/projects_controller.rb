@@ -33,7 +33,6 @@ class ProjectsController < ApplicationController
         format.turbo_stream { redirect_to @project, notice: "Project was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_content }
-        format.turbo_stream { render :edit, status: :unprocessable_content }
       end
     end
   end

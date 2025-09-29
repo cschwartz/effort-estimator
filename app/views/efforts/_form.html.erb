@@ -3,6 +3,7 @@
   <%= f.input :title, input_html: { autofocus: true } %>
   <%= f.input :description %>
   <%= f.hidden_field :parent_id %>
+  <%= f.hidden_field :position %>
   <%= link_to "Cancel", project_efforts_path(@project), class: "btn btn-warning" %>
   <%= f.submit class: "btn btn-secondary" %>
 <% end %>

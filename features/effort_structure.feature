@@ -1,9 +1,9 @@
+@javascript
 Feature: Manage Effort Tree Structure
   As a user
   I want to manage effort breakdown structures
   So that I can organize and track project work hierarchically
 
-  @javascript
   Scenario: View root effort nodes
     Given I am logged in as a user "project-manager" with roles
       | role         |
@@ -22,7 +22,6 @@ Feature: Manage Effort Tree Structure
     Then I should see the root effort "Frontend Development"
     And I should see the root effort "Backend Development"
 
-  @javascript
   Scenario: View child effort nodes
     Given I am logged in as a user "project-manager" with roles
       | role         |
@@ -43,7 +42,6 @@ Feature: Manage Effort Tree Structure
 
   Rule: Create effort nodes
 
-    @javascript
     Scenario: Create root effort node
       Given I am logged in as a user "project-manager" with roles
         | role           |
@@ -63,7 +61,6 @@ Feature: Manage Effort Tree Structure
       Then I should see a status message "Effort was successfully created"
       And I should see the root effort "Database Design"
 
-    @javascript
     Scenario: Create child effort node
       Given I am logged in as a user "project-manager" with roles
         | role           |
@@ -86,7 +83,6 @@ Feature: Manage Effort Tree Structure
       Then I should see a status message "Effort was successfully created"
       And I should see the effort "Database Integration" at path "Backend Development"
 
-    @javascript
     Scenario: Create effort node without a title
       Given I am logged in as a user "project-manager" with roles
         | role           |
@@ -105,7 +101,6 @@ Feature: Manage Effort Tree Structure
       And I create the effort
       Then I should see the error message "Title can't be blank"
 
-    @javascript
     Scenario: Create child effort node without a title
       Given I am logged in as a user "project-manager" with roles
         | role           |
@@ -129,7 +124,6 @@ Feature: Manage Effort Tree Structure
 
   Rule: Update effort nodes
 
-    @javascript
     Scenario: Update effort node
       Given I am logged in as a user "project-manager" with roles
         | role           |
@@ -152,7 +146,6 @@ Feature: Manage Effort Tree Structure
       Then I should see a status message "Effort was successfully updated"
       And I should see the root effort "Updated Backend Development"
 
-    @javascript
     Scenario: Update effort node with empty title
       Given I am logged in as a user "project-manager" with roles
         | role           |
@@ -176,7 +169,6 @@ Feature: Manage Effort Tree Structure
 
   Rule: Delete effort nodes
 
-    @javascript
     Scenario: Delete root effort node
       Given I am logged in as a user "project-manager" with roles
         | role           |
@@ -195,7 +187,6 @@ Feature: Manage Effort Tree Structure
       Then I should see a status message "Effort was successfully deleted"
       And I should not see the root effort "Backend Development"
 
-    @javascript
     Scenario: Delete child effort node
       Given I am logged in as a user "project-manager" with roles
         | role           |
@@ -216,7 +207,6 @@ Feature: Manage Effort Tree Structure
       Then I should see a status message "Effort was successfully deleted"
       And I should not see the effort "User Authentication" at path "Backend Development"
 
-    @javascript
     Scenario: Delete effort node with children removes all descendants
       Given I am logged in as a user "project-manager" with roles
         | role           |
@@ -239,7 +229,6 @@ Feature: Manage Effort Tree Structure
 
   Rule: Move effort nodes
 
-    @javascript
     Scenario: Reorder effort nodes among siblings
       Given I am logged in as a user "project-manager" with roles
         | role           |
@@ -263,7 +252,6 @@ Feature: Manage Effort Tree Structure
         | Frontend Development |
         | Testing Phase        |
 
-    @javascript
     Scenario: Move effort node to different parent
       Given I am logged in as a user "project-manager" with roles
         | role           |
