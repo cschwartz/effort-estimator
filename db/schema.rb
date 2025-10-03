@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_15_182700) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_29_122415) do
+  create_table "categories", force: :cascade do |t|
+    t.string "title"
+    t.integer "category_type"
+    t.integer "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_categories_on_project_id"
+  end
+
   create_table "effort_hierarchies", id: false, force: :cascade do |t|
     t.integer "ancestor_id", null: false
     t.integer "descendant_id", null: false
@@ -39,5 +48,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_15_182700) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "categories", "projects"
   add_foreign_key "efforts", "projects"
 end

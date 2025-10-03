@@ -1,9 +1,9 @@
 <div>
   <%= breadcrumbs(@project, "Edit") %>
   <div class="project">
-    <%= page_header @project.title %>
-    <div class="details bg-base-100 rounded-lg p-6">
-      <%= render "form", project: @project %>
-    </div>
+    <%= page_header @project %>
+    <%= turbo_frame_tag Project.new do %>
+      <%= render partial: "form", locals: {project: @project} %>
+    <% end %>
   </div>
 </div>

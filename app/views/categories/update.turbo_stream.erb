@@ -1,0 +1,3 @@
+<%= turbo_stream.update Category.new, "" %>
+<%= turbo_stream.replace dom_id(@category), partial: "category", locals: { category: @category, project: @project } %>
+<%= render_turbo_stream_flash_messages %>

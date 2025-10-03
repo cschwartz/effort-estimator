@@ -17,6 +17,8 @@ When('I visit the {string} section') do |section|
   case section
   when "Effort Breakdown"
     click_link "Effort Breakdown"
+  when "Categories"
+    click_link "Categories"
   else
     raise "Unknown section: #{section}"
   end

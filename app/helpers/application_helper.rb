@@ -1,17 +1,28 @@
 module ApplicationHelper
+  include Rails.application.routes.url_helpers
+
   def render_turbo_stream_flash_messages
     turbo_stream.prepend "flash", partial: "layouts/flash"
   end
 
-  def breadcrumbs(entity = nil, current_page = nil)
+  def breadcrumbs(*parts)
     content_tag :div, class: "breadcrumbs text-sm" do
       content_tag :ul do
-        breadcrumb_items(entity, current_page).join.html_safe
+        breadcrumb_items(*parts).join.html_safe
       end
     end
   end
 
-  def page_header(title, actions: [])
+  def page_header(item, actions: [])
+    title = case item
+    when Class
+      item.name.pluralize
+    when ActiveRecord::Base
+      item.persisted? ? item.title : "New #{item.model_name.human}"
+    when String
+      item
+    end
+
     content_tag :div, class: "header prose max-w-none" do
       content_tag :div, class: "flex justify-between items-baseline" do
         concat content_tag(:h1, title, class: "title mb-0")
@@ -70,46 +81,57 @@ module ApplicationHelper
 
   private
 
-  def breadcrumb_items(entity, current_page)
+  def breadcrumb_items(*parts)
     items = []
+    parents = []
 
-    if entity
-      collection, collection_path = from_entity entity
+    parts.each_with_index do |part, index|
+      is_last = (index == parts.length - 1)
 
-      unless current_page?(collection_path)
-        items << content_tag(:li, link_to(collection.humanize, collection_path))
-      else
-        items << content_tag(:li, collection.humanize)
-      end
+      case part
+      when Class
+        collection_name = part.name.pluralize
 
-      if !(entity.is_a? Class) and entity.persisted?
-        entity_path = url_for(entity)
-        if current_page && !current_page?(entity_path)
-          items << content_tag(:li, link_to(entity.title, entity_path))
+        if parents.empty?
+          collection_path = url_for(part)
         else
-          items << content_tag(:li, entity.title)
+          collection_path = url_for([ *parents, part.model_name.collection.to_sym ])
         end
-      end
-    end
 
-    if current_page
-      items << content_tag(:li, current_page)
+        items << breadcrumb_link_or_text(collection_name, collection_path, is_last)
+      when ActiveRecord::Base
+        collection_name = part.class.model_name.collection.humanize
+
+        if parents.empty?
+          collection_path = url_for(controller: part.class.model_name.collection, action: :index)
+        else
+          collection_path = url_for([ *parents, part.class.model_name.collection.to_sym ])
+        end
+
+        unless is_last
+          items << breadcrumb_link_or_text(collection_name, collection_path, false)
+        end
+
+        if part.persisted?
+          instance_path = url_for([ *parents, part ])
+          items << breadcrumb_link_or_text(part.title, instance_path, is_last)
+          parents << part
+        end
+
+      when String
+        items << content_tag(:li, part)
+
+      end
     end
 
     items
   end
 
-  def from_entity(entity)
-    if entity.is_a? Class
-        collection = entity.name.pluralize
-        collection_path = url_for(Project)
-
-        return collection, collection_path
+  def breadcrumb_link_or_text(label, path, is_current)
+    if is_current || current_page?(path)
+      content_tag(:li, label)
     else
-        collection = entity.class.model_name.collection
-        collection_path = url_for(controller: collection, action: :index)
-
-        return collection, collection_path
+      content_tag(:li, link_to(label, path))
     end
   end
 end

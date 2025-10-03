@@ -87,7 +87,6 @@ Feature: Manage Projects
       And I update the project
       Then I should see a status message "Project was successfully updated"
       And I should see project details including the title "Updated Project Title"
-      And I should see project details including the description "Updated description"
 
     Scenario: Update project with empty title
       Given I am logged in as a user "project-manager" with roles

@@ -1,0 +1,32 @@
+<div>
+  <%= breadcrumbs(@project, Category) %>
+  <div class="categories">
+    <%= page_header Category, actions: [{
+      label: "Create",
+      link: new_project_category_path(@project),
+      options: { data: { turbo_frame: dom_id(Category.new) } }
+    }] %>
+    <%= turbo_frame_tag Category.new %>
+    <div class="list">
+      <table class="table table-zebra w-full">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="categories">
+          <%= render partial: 'category', collection: @categories, locals: { project: @project } %>
+          <% if @categories.empty? %>
+            <tr>
+              <td id="empty" colspan="3" class="text-center py-6 text-base-content/60 italic">
+                No existing categories
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

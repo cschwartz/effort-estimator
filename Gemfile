@@ -69,6 +69,7 @@ group :development do
   gem "web-console"
   gem "rails_live_reload"
   gem "htmlbeautifier"
+  gem "ruby-lsp-rails"
 end
 
 gem "simple_form", "~> 5.3"

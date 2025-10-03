@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to projects_path, notice: "Project was successfully created." }
         format.turbo_stream { flash.now[:notice] = "Project was successfully created." }
-     end
+      end
     else
       render :new, status: :unprocessable_content
     end
@@ -27,13 +27,13 @@ class ProjectsController < ApplicationController
   def edit; end
 
   def update
-    respond_to do |format|
-      if @project.update(project_params)
-        format.html { redirect_to @project, notice: "Project was successfully updated." }
-        format.turbo_stream { redirect_to @project, notice: "Project was successfully updated." }
-      else
-        format.html { render :edit, status: :unprocessable_content }
+    if @project.update(project_params)
+      respond_to do |format|
+        format.html { redirect_to projects_path, notice: "Project was successfully updated." }
+        format.turbo_stream { flash.now[:notice] = "Project was successfully updated." }
       end
+    else
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -41,7 +41,7 @@ class ProjectsController < ApplicationController
     @project.destroy
     respond_to do |format|
       format.html { redirect_to projects_path, notice: "Project was successfully deleted." }
-      format.turbo_stream { redirect_to projects_path, notice: "Project was successfully deleted." }
+      format.turbo_stream { flash.now[:notice] = "Project was successfully deleted." }
     end
   end
 

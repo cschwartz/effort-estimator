@@ -318,6 +318,8 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
       ffi (~> 1.0)
+    rbs (3.9.5)
+      logger
     rdoc (6.14.2)
       erb
       psych (>= 4.0.0)
@@ -370,6 +372,12 @@ GEM
       rubocop (>= 1.72)
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
+    ruby-lsp (0.26.1)
+      language_server-protocol (~> 3.17.0)
+      prism (>= 1.2, < 2.0)
+      rbs (>= 3, < 5)
+    ruby-lsp-rails (0.4.8)
+      ruby-lsp (>= 0.26.0, < 0.27.0)
     ruby-progressbar (1.13.0)
     rubyzip (3.1.0)
     securerandom (0.4.1)
@@ -496,6 +504,7 @@ DEPENDENCIES
   rails_live_reload
   rspec-rails
   rubocop-rails-omakase
+  ruby-lsp-rails
   selenium-webdriver
   simple_form (~> 5.3)
   solid_cable
@@ -511,4 +520,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   2.6.9
+   2.7.1

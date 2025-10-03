@@ -1,14 +1,14 @@
 <div>
   <%= breadcrumbs Project %>
-  <div class="project">
-    <%= page_header "Projects", actions: [{ 
+  <div class="projects">
+    <%= page_header Project, actions: [{ 
       label: "Create", 
       link: new_project_path, 
       options: { data: { turbo_frame: dom_id(Project.new) } }
     }] %>
     <%= turbo_frame_tag Project.new %>
     <div class="list">
-      <table class="table">
+      <table class="table table-zebra w-full">
         <thead>
           <tr>
             <th>Title</th>

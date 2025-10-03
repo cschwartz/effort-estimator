@@ -1,9 +1,9 @@
-<main class="container">
-  <%= link_to "Back", projects_path %>
-  <div class="header">
-    <h1>New project</h1>
+<div>
+  <%= breadcrumbs(@project) %>
+  <div class="project">
+    <%= page_header @project %>
+    <%= turbo_frame_tag @project do %>
+      <%= render partial: "form", locals: {project: @project} %>
+    <% end %>
   </div>
-  <%= turbo_frame_tag @project do %>
-    <%= render "form", project: @project %>
-  <% end %>
-</main>
+</div>

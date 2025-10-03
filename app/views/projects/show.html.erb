@@ -1,13 +1,15 @@
 <div>
   <%= breadcrumbs(@project) %>
   <div class="project">
-    <%= page_header @project.title, actions: [{ 
+    <%= page_header @project, actions: [{ 
       label: "Edit", 
       link: edit_project_path(@project), 
       options: { data: { turbo_frame: dom_id(Project.new) } }
     }, {
       label: "Delete",
+      link: project_path(@project),
       type: :button_to,
+      options: { method: :delete, confirm: "Are you sure?", class: "btn btn-error" },
       color: "btn-error"
     }] %>
     <div class="details bg-base-100 rounded-lg p-6">

@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "effort-sidebar" do %>
   <div class="effort">
-    <%= page_header @effort.title, actions: @is_edit ? [] : [
+    <%= page_header @effort, actions: @is_edit ? [] : [
         {
             label: "Add Child",
             link: new_project_effort_path(@project, parent_id: @effort.id),

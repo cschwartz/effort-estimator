@@ -1,0 +1,40 @@
+<div>
+  <%= breadcrumbs(@project, @category) %>
+  <div class="category">
+    <%= page_header @category, actions: [{
+      label: "Edit",
+      link: edit_project_category_path(@project, @category),
+      options: { data: { turbo_frame: dom_id(Project.new) }}
+    }, {
+      label: "Delete",
+      link: project_category_path(@project, @category),
+      type: :button_to,
+      options: { method: :delete, confirm: "Are you sure?", class: "btn btn-error" }
+      color: "btn-error"
+    }] %>
+    <div class="details bg-base-100 rounded-lg p-6">
+      <dl class="space-y-4">
+        <div class="property-row">
+          <dt class="text-sm font-medium text-base-content/70 block mb-1">Type</dt>
+          <dd class="category-type">
+            <span class="badge badge-outline badge-lg">
+              <%= @category.category_type.humanize %>
+            </span>
+          </dd>
+        </div>
+        <div class="property-row">
+          <dt class="text-sm font-medium text-base-content/70 block mb-1">Created</dt>
+          <dd class="text-sm text-base-content/80">
+            <%= @category.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+          </dd>
+        </div>
+        <div class="property-row">
+          <dt class="text-sm font-medium text-base-content/70 block mb-1">Last Updated</dt>
+          <dd class="text-sm text-base-content/80">
+            <%= @category.updated_at.strftime("%B %d, %Y at %I:%M %p") %>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>

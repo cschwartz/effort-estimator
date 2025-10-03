@@ -1,0 +1,4 @@
+<%= turbo_stream.update Category.new, "" %>
+<%= turbo_stream.append "categories", partial: "category", locals: { category: @category, project: @project }  %>
+<%= turbo_stream.remove "empty" %>
+<%= render_turbo_stream_flash_messages %>
