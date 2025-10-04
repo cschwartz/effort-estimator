@@ -2,24 +2,14 @@ class EffortsController < ApplicationController
   include TreePositioning
 
   before_action :set_project
-  before_action :set_effort, only: [ :edit, :update, :destroy ]
+  before_action :set_efforts, only: [ :index, :new, :edit, :show, :update, :create ]
+  before_action :set_effort, only: [ :show, :edit, :update, :destroy ]
 
-  def index
-    @efforts = @project.efforts.roots.includes(:children)
-    @effort = nil
-    @is_edit = false
-  end
+  def index; end
 
   def new
-    @efforts = @project.efforts.roots.includes(:children)
     @parent = @project.efforts.find(params[:parent_id]) if params[:parent_id].present?
     @effort = @project.efforts.build(parent: @parent)
-    @is_edit = true
-
-    respond_to do |format|
-      format.html { render :index }
-      format.turbo_stream
-    end
   end
 
   def create
@@ -31,33 +21,13 @@ class EffortsController < ApplicationController
         format.turbo_stream { flash.now[:notice] = "Effort was successfully created." }
       end
     else
-      respond_to do |format|
-        @efforts = @project.efforts.roots.includes(:children)
-        @is_edit = true
-        format.html { render :index, status: :unprocessable_content }
-      end
+      render :new, status: :unprocessable_content
     end
   end
 
-  def edit
-    @efforts = @project.efforts.roots.includes(:children)
-    @is_edit = true
+  def edit; end
 
-    respond_to do |format|
-      format.html { render :index }
-    end
-  end
-
-  def show
-      @efforts = @project.efforts.roots.includes(:children)
-      @effort = @project.efforts.find(params[:id])
-      @is_edit = false
-
-      respond_to do |format|
-        format.html { render :index }
-        format.turbo_stream
-      end
-  end
+  def show; end
 
   def update
     if update_effort
@@ -66,11 +36,7 @@ class EffortsController < ApplicationController
         format.turbo_stream { flash.now[:notice] = "Effort was successfully updated." }
       end
     else
-      respond_to do |format|
-        @efforts = @project.efforts.roots.includes(:children)
-        @is_edit = true
-        format.html { render :index, status: :unprocessable_content }
-      end
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -112,6 +78,10 @@ class EffortsController < ApplicationController
 
   def set_effort
     @effort = @project.efforts.find(params[:id])
+  end
+
+  def set_efforts
+    @efforts = @project.efforts.roots.includes(:children)
   end
 
   def effort_params

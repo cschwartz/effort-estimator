@@ -1,5 +1,3 @@
-<%= turbo_frame_tag "effort-tree" do %>
-  <ul class="effort-subtree space-y-4" data-controller="treesortable" data-treesortable-response-kind-value="turbo-stream" data-treesortable-resource-name-value="effort" data-treesortable-handle-value=".sort-handle" data-treesortable-group-value="effort-tree">
-    <%= render partial: "effort_subtree", locals: { efforts: efforts } %>
-  </ul>
-<% end %>
+<ul class="effort-subtree space-y-4" data-controller="treesortable" data-treesortable-response-kind-value="turbo-stream" data-treesortable-resource-name-value="effort" data-treesortable-handle-value=".sort-handle" data-treesortable-group-value="effort-tree">
+  <%= render partial: "effort_subtree", locals: { efforts: efforts } %>
+</ul>

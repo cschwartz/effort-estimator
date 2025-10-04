@@ -1,6 +1,5 @@
-<%= turbo_frame_tag "effort-sidebar" do %>
-  <div class="effort">
-    <%= page_header @effort, actions: @is_edit ? [] : [
+<div class="effort">
+  <%= page_header @effort, actions: @is_edit ? [] : [
         {
             label: "Add Child",
             link: new_project_effort_path(@project, parent_id: @effort.id),
@@ -18,12 +17,11 @@
             options: {data: {turbo_method: :delete}}
         }
     ] %>
-    <div class="details bg-base-100 rounded-lg p-6">
-      <% if @is_edit %>
-        <%= render partial: "form" %>
-      <% else %>
-        <%= render partial: "effort_details", locals: {effort: @effort}%>
-      <% end %>
-    </div>
+  <div class="details bg-base-100 rounded-lg p-6">
+    <% if @is_edit %>
+      <%= render partial: "form" %>
+    <% else %>
+      <%= render partial: "effort_details", locals: {effort: @effort}%>
+    <% end %>
   </div>
-<% end %>
+</div>

@@ -1,7 +1,7 @@
-<%= turbo_stream.replace "effort-tree" do %>
+<%= turbo_stream.update "effort-tree" do %>
   <%= render partial: "effort_tree", locals: { efforts: @project.efforts.roots.includes(:children) } %>
 <% end %>
-<%= turbo_stream.replace "effort-sidebar" do %>
+<%= turbo_stream.update "effort-sidebar" do %>
   <%= render @effort %>
 <% end %>
 <%= render_turbo_stream_flash_messages %>
