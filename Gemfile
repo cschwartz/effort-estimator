@@ -70,9 +70,12 @@ group :development do
   gem "rails_live_reload"
   gem "htmlbeautifier"
   gem "ruby-lsp-rails"
+  gem "lookbook"
 end
 
 gem "simple_form", "~> 5.3"
 gem "closure_tree"
 
 gem "tailwindcss-ruby", "~> 4.1"
+
+gem "view_component"

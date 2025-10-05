@@ -5,14 +5,6 @@ module ApplicationHelper
     turbo_stream.prepend "flash", partial: "layouts/flash"
   end
 
-  def breadcrumbs(*parts)
-    content_tag :div, class: "breadcrumbs text-sm" do
-      content_tag :ul do
-        breadcrumb_items(*parts).join.html_safe
-      end
-    end
-  end
-
   def page_header(item, actions: [])
     title = case item
     when Class
@@ -80,58 +72,4 @@ module ApplicationHelper
   end
 
   private
-
-  def breadcrumb_items(*parts)
-    items = []
-    parents = []
-
-    parts.each_with_index do |part, index|
-      is_last = (index == parts.length - 1)
-
-      case part
-      when Class
-        collection_name = part.name.pluralize
-
-        if parents.empty?
-          collection_path = url_for(part)
-        else
-          collection_path = url_for([ *parents, part.model_name.collection.to_sym ])
-        end
-
-        items << breadcrumb_link_or_text(collection_name, collection_path, is_last)
-      when ActiveRecord::Base
-        collection_name = part.class.model_name.collection.humanize
-
-        if parents.empty?
-          collection_path = url_for(controller: part.class.model_name.collection, action: :index)
-        else
-          collection_path = url_for([ *parents, part.class.model_name.collection.to_sym ])
-        end
-
-        unless is_last
-          items << breadcrumb_link_or_text(collection_name, collection_path, false)
-        end
-
-        if part.persisted?
-          instance_path = url_for([ *parents, part ])
-          items << breadcrumb_link_or_text(part.title, instance_path, is_last)
-          parents << part
-        end
-
-      when String
-        items << content_tag(:li, part)
-
-      end
-    end
-
-    items
-  end
-
-  def breadcrumb_link_or_text(label, path, is_current)
-    if is_current || current_page?(path)
-      content_tag(:li, label)
-    else
-      content_tag(:li, link_to(label, path))
-    end
-  end
 end

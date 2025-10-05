@@ -1,5 +1,5 @@
 <div>
-  <%= breadcrumbs(@project) %>
+  <%= render BreadcrumbsComponent.new(@project) %>
   <div class="project">
     <%= page_header @project, actions: [{ 
       label: "Edit", 

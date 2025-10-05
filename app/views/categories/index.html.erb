@@ -1,5 +1,5 @@
 <div>
-  <%= breadcrumbs(@project, Category) %>
+  <%= render BreadcrumbsComponent.new(@project, Category) %>
   <div class="categories">
     <%= page_header Category, actions: [{
       label: "Create",

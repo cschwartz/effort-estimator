@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Lookbook::Engine, at: "/lookbook" if Rails.env.development?
+
   root "projects#index"
 
   resources :projects do

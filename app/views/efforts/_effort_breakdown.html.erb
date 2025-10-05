@@ -1,5 +1,5 @@
 <div>
-  <%= breadcrumbs(@project, "Effort Breakdown") %>
+  <%= render BreadcrumbsComponent.new(@project, "Effort Breakdown") %>
   <div class="effort-breakdown">
     <%= page_header "Effort Breakdown", actions: [{
       label: "Add Root Effort",

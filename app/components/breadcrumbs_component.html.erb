@@ -1,0 +1,13 @@
+<div class="breadcrumbs text-sm">
+  <ul>
+    <% items.each do |item| %>
+      <li>
+        <% if item[:is_current] %>
+          <%= item[:label] %>
+        <% else %>
+          <%= link_to item[:label], helpers.url_for(item[:path]) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

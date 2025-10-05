@@ -1,5 +1,5 @@
 <div>
-  <%= breadcrumbs(@project, "Edit") %>
+  <%= render BreadcrumbsComponent.new(@project, "Edit") %>
   <div class="project">
     <%= page_header @project %>
     <%= turbo_frame_tag Project.new do %>
