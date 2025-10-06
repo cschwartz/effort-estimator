@@ -5,24 +5,6 @@ module ApplicationHelper
     turbo_stream.prepend "flash", partial: "layouts/flash"
   end
 
-  def page_header(item, actions: [])
-    title = case item
-    when Class
-      item.name.pluralize
-    when ActiveRecord::Base
-      item.persisted? ? item.title : "New #{item.model_name.human}"
-    when String
-      item
-    end
-
-    content_tag :div, class: "header prose max-w-none" do
-      content_tag :div, class: "flex justify-between items-baseline" do
-        concat content_tag(:h1, title, class: "title mb-0")
-        concat content_tag(:div, actions.map { |action| render_action(action) }.join.html_safe, class: "flex gap-2 not-prose")
-      end
-    end
-  end
-
   def form_errors(model)
     return unless model.errors.any?
 
@@ -39,37 +21,4 @@ module ApplicationHelper
       svg + error_content
     end
   end
-
-  private
-
-  def render_action(action)
-    label = action[:label]
-    link = action[:link]
-    type = action[:type] || :link_to
-    color = action[:color] || "btn-primary"
-    size = action[:size] || "btn-md"
-    options = action[:options] || {}
-
-    css_classes = "btn #{color} #{size}"
-
-    case type
-    when :button_to
-      method = options[:method] || :delete
-      data = options[:data] || {}
-      form_options = options[:form] || {}
-
-      button_to label, link,
-        method: method,
-        data: data,
-        class: css_classes,
-        form: form_options
-    else
-      existing_classes = options[:class] || ""
-      final_classes = [ css_classes, existing_classes ].join(" ").strip
-      link_options = options.merge(class: final_classes)
-      link_to label, link, link_options
-    end
-  end
-
-  private
 end

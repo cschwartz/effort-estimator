@@ -1,0 +1,5 @@
+<%= render PageHeaderComponent.new("Efforts") do |c| %>
+  <% c.with_action do %>
+    <%= render CreateActionComponent.new(href: "#", label: "Add Root Effort", turbo_frame: "effort-sidebar") %>
+  <% end %>
+<% end %>

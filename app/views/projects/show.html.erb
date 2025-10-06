@@ -1,17 +1,14 @@
 <div>
   <%= render BreadcrumbsComponent.new(@project) %>
   <div class="project">
-    <%= page_header @project, actions: [{ 
-      label: "Edit", 
-      link: edit_project_path(@project), 
-      options: { data: { turbo_frame: dom_id(Project.new) } }
-    }, {
-      label: "Delete",
-      link: project_path(@project),
-      type: :button_to,
-      options: { method: :delete, confirm: "Are you sure?", class: "btn btn-error" },
-      color: "btn-error"
-    }] %>
+    <%= render PageHeaderComponent.new(@project) do |c| %>
+      <% c.with_action do %>
+        <%= render EditActionComponent.new(href: edit_project_path(@project), turbo_frame: dom_id(Project.new)) %>
+      <% end %>
+      <% c.with_action do %>
+        <%= render DeleteActionComponent.new(href: project_path(@project)) %>
+      <% end %>
+    <% end %>
     <div class="details bg-base-100 rounded-lg p-6">
       <dl class="space-y-4">
         <div class="property-row">

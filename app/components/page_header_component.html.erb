@@ -1,0 +1,12 @@
+<div class="header prose max-w-none">
+  <div class="flex justify-between items-baseline">
+    <h1 class="title mb-0"><%= title %></h1>
+    <% if actions? %>
+      <div class="flex gap-2 not-prose">
+        <% actions.each do |action| %>
+          <%= action %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

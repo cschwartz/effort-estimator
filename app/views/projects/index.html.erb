@@ -1,11 +1,11 @@
 <div>
   <%= render BreadcrumbsComponent.new(Project) %>
   <div class="projects">
-    <%= page_header Project, actions: [{ 
-      label: "Create", 
-      link: new_project_path, 
-      options: { data: { turbo_frame: dom_id(Project.new) } }
-    }] %>
+    <%= render PageHeaderComponent.new(Project) do |c| %>
+      <% c.with_action do %>
+        <%= render CreateActionComponent.new(href: new_project_path, turbo_frame: dom_id(Project.new)) %>
+      <% end %>
+    <% end %>
     <%= turbo_frame_tag Project.new %>
     <div class="list">
       <table class="table table-zebra w-full">

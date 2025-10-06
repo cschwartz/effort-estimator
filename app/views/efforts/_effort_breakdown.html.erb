@@ -1,11 +1,11 @@
 <div>
   <%= render BreadcrumbsComponent.new(@project, "Effort Breakdown") %>
   <div class="effort-breakdown">
-    <%= page_header "Effort Breakdown", actions: [{
-      label: "Add Root Effort",
-      link: new_project_effort_path(@project),
-      options: { data: { turbo_frame: "effort-sidebar" } }
-    }] %>
+    <%= render PageHeaderComponent.new("Effort Breakdown") do |c| %>
+      <% c.with_action do %>
+        <%= render CreateActionComponent.new(href: new_project_effort_path(@project), label: "Add Root Effort", turbo_frame: "effort-sidebar") %>
+      <% end %>
+    <% end %>
     <div class="grid grid-cols-12 gap-6 h-screen">
       <div class="col-span-6 p-4 overflow-y-auto">
         <h3 class="text-lg font-semibold mb-4">Effort Structure</h3>
