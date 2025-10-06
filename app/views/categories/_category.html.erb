@@ -11,17 +11,15 @@
   </td>
   <td class="actions">
     <div class="flex gap-2">
-      <%= link_to "Edit", edit_project_category_path(project, category),
-          data: { turbo_frame: dom_id(Category.new) },
-          class: "btn btn-primary btn-xs" %>
-      <%= button_to "Delete", project_category_path(project, category),
-          method: :delete,
-          data: {
-            confirm: "Are you sure?",
-            turbo_method: :delete,
-            turbo_stream: true
-          },
-          class: "btn btn-error btn-xs" %>
+      <%= render EditActionComponent.new(
+        href: edit_project_category_path(project, category),
+        turbo_frame: dom_id(Category.new),
+        size: :xs
+      ) %>
+      <%= render DeleteActionComponent.new(
+        href: project_category_path(project, category),
+        size: :xs
+      ) %>
     </div>
   </td>
 </tr>

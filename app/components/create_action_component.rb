@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class CreateActionComponent < ViewComponent::Base
-  def initialize(href:, label: "Create", turbo_frame: nil, **options)
+  def initialize(href:, label: "Create", turbo_frame: nil, size: nil, **options)
     @href = href
     @label = label
     @turbo_frame = turbo_frame
+    @size = size
     @options = options
   end
 
@@ -15,7 +16,8 @@ class CreateActionComponent < ViewComponent::Base
   private
 
   def link_options
-    css_classes = [ "btn", "btn-primary", @options[:class] ].compact.join(" ")
+    size_class = @size ? "btn-#{@size}" : nil
+    css_classes = [ "btn", "btn-primary", size_class, @options[:class] ].compact.join(" ")
     opts = @options.merge(class: css_classes)
     opts[:data] = (opts[:data] || {}).merge(turbo_frame: @turbo_frame) if @turbo_frame
     opts

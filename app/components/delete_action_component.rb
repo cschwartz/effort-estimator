@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class DeleteActionComponent < ViewComponent::Base
-  def initialize(href:, confirm: "Are you sure?", turbo_method: :delete, **options)
+  def initialize(href:, confirm: "Are you sure?", turbo_method: :delete, size: nil, **options)
     @href = href
     @confirm = confirm
     @turbo_method = turbo_method
+    @size = size
     @options = options
   end
 
@@ -15,7 +16,8 @@ class DeleteActionComponent < ViewComponent::Base
   private
 
   def button_options
-    css_classes = [ "btn", "btn-error", @options[:class] ].compact.join(" ")
+    size_class = @size ? "btn-#{@size}" : nil
+    css_classes = [ "btn", "btn-error", size_class, @options[:class] ].compact.join(" ")
     data = @options[:data] || {}
     data = data.merge(confirm: @confirm) if @confirm
     data = data.merge(turbo_method: @turbo_method) if @turbo_method

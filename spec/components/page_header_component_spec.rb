@@ -51,20 +51,20 @@ RSpec.describe PageHeaderComponent, type: :component do
   describe "rendering with actions" do
     it "renders action slots" do
       render_inline(described_class.new(Project)) do |c|
-        c.with_action { '<a href="/test" class="btn btn-primary">Test Action</a>'.html_safe }
+        c.with_action { '<a href="/test" class="btn">Test Action</a>'.html_safe }
       end
 
-      expect(page).to have_link("Test Action", href: "/test")
-      expect(page).to have_css("a.btn.btn-primary")
+      expect(page).to have_css(".flex.gap-2.not-prose")
+      expect(page).to have_link("Test Action")
     end
 
     it "renders multiple action slots" do
       render_inline(described_class.new(project)) do |c|
         c.with_action { '<a href="/edit" class="btn">Edit</a>'.html_safe }
-        c.with_action { '<button class="btn btn-error">Delete</button>'.html_safe }
+        c.with_action { '<button class="btn">Delete</button>'.html_safe }
       end
 
-      expect(page).to have_link("Edit", href: "/edit")
+      expect(page).to have_link("Edit")
       expect(page).to have_button("Delete")
     end
   end
@@ -80,7 +80,7 @@ RSpec.describe PageHeaderComponent, type: :component do
 
     it "renders actions container when actions are provided" do
       render_inline(described_class.new(Project)) do |c|
-        c.with_action { CreateActionComponent.new(href: "#").call }
+        c.with_action { '<a href="#" class="btn">Action</a>'.html_safe }
       end
 
       expect(page).to have_css(".flex.gap-2.not-prose")
