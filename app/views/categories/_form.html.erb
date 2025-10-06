@@ -1,5 +1,5 @@
 <%= simple_form_for [project, category], wrapper: :vertical_form do |f| %>
-  <%= form_errors(category) %>
+  <%= render FormErrorsComponent.new(category) %>
   <%= f.input :title, input_html: { autofocus: true } %>
   <%= f.input :category_type, collection: Category.category_types.keys.map { |key| [key.humanize, key] }, prompt: "Select type" %>
   <%= link_to "Cancel", project_categories_path(project), class: "btn btn-warning" %>
