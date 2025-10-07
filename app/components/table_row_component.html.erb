@@ -1,0 +1,7 @@
+<tr class="<%= css_class %>" id="<%= dom_id %>">
+  <% columns.each do |column| %>
+    <td class="<%= column.css_class %>">
+      <%= column %>
+    </td>
+  <% end %>
+</tr>

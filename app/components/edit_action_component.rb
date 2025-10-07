@@ -9,7 +9,11 @@ class EditActionComponent < ViewComponent::Base
   end
 
   def call
-    link_to "Edit", @href, **link_options
+    link_to "Edit", href, **link_options
+  end
+
+  def href
+    @href.respond_to?(:call) ? @href.call : @href
   end
 
   private

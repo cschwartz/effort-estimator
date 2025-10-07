@@ -1,0 +1,6 @@
+<%= link_to(
+  @value.call,
+  @href.call,
+  data: { turbo_frame: @turbo_frame },
+  class: "link link-hover"
+) %>

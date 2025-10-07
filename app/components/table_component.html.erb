@@ -1,0 +1,22 @@
+<table class="table table-zebra w-full">
+  <thead>
+    <tr>
+      <% headers.each do |header| %>
+        <th><%= header %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody id="<%= @id %>">
+    <% if @collection.any? %>
+      <% @collection.each do |record| %>
+        <%= render @row_component.new(record: record, **@row_options) %>
+      <% end %>
+    <% else %>
+      <tr>
+        <td id="empty" colspan="<%= colspan %>" class="text-center py-6 text-base-content/60 italic">
+          <%= @empty_message %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

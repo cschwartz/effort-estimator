@@ -8,24 +8,13 @@
     <% end %>
     <%= turbo_frame_tag Project.new %>
     <div class="list">
-      <table class="table table-zebra w-full">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="projects">
-          <%= render @projects %>
-          <% if @projects.empty? %>
-            <tr>
-              <td id="empty" colspan="2" class="text-center py-6 text-base-content/60 italic">
-                No existing projects
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render TableComponent.new(
+        collection: @projects,
+        row_component: ProjectRowComponent,
+        headers: ["Title", "Actions"],
+        id: "projects",
+        empty_message: "No existing projects"
+      ) %>
     </div>
   </div>
 </div>

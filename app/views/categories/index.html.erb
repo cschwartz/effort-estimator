@@ -8,25 +8,14 @@
     <% end %>
     <%= turbo_frame_tag Category.new %>
     <div class="list">
-      <table class="table table-zebra w-full">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Type</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="categories">
-          <%= render partial: 'category', collection: @categories, locals: { project: @project } %>
-          <% if @categories.empty? %>
-            <tr>
-              <td id="empty" colspan="3" class="text-center py-6 text-base-content/60 italic">
-                No existing categories
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render TableComponent.new(
+        collection: @categories,
+        row_component: CategoryRowComponent,
+        headers: ["Title", "Type", "Actions"],
+        id: "categories",
+        empty_message: "No existing categories",
+        project: @project
+      ) %>
     </div>
   </div>
 </div>

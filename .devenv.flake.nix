@@ -12,7 +12,7 @@ devenv_istesting = false;
 devenv_direnvrc_latest_version = 1;
 container_name = null;
 active_profiles = [ ];
-hostname = "altocumulus.local";
+hostname = "Mac.internal";
 username = "cschwartz";
 git_root = "/Users/cschwartz/Documents/projects/effort-estimator";
 
@@ -39,7 +39,7 @@ devenv_istesting = false;
 devenv_direnvrc_latest_version = 1;
 container_name = null;
 active_profiles = [ ];
-hostname = "altocumulus.local";
+hostname = "Mac.internal";
 username = "cschwartz";
 git_root = "/Users/cschwartz/Documents/projects/effort-estimator";
 

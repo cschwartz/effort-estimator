@@ -10,7 +10,11 @@ class DeleteActionComponent < ViewComponent::Base
   end
 
   def call
-    button_to "Delete", @href, **button_options
+    button_to "Delete", href, **button_options
+  end
+
+  def href
+    @href.respond_to?(:call) ? @href.call : @href
   end
 
   private

@@ -1,0 +1,15 @@
+<table class="table table-zebra w-full">
+  <thead>
+    <tr>
+      <td>Type</td>
+    </tr>
+  </thead>
+  <tr>
+    <td>
+      <%= render BadgeColumnComponent.new(
+        header: "Type",
+        value: -> { "scaled" }
+      ) %>
+    </td>
+  </tr>
+</table>
