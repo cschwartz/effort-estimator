@@ -1,0 +1,6 @@
+<%= simple_form_for [project, parameter], wrapper: :vertical_form do |f| %>
+  <%= render Forms::FormErrorsComponent.new(parameter) %>
+  <%= f.input :title, input_html: { autofocus: true } %>
+  <%= link_to "Cancel", project_parameters_path(project), class: "btn btn-warning" %>
+  <%= f.submit class: "btn btn-secondary" %>
+<% end %>

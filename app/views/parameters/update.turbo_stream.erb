@@ -1,0 +1,3 @@
+<%= turbo_stream.update Parameter.new, "" %>
+<%= turbo_stream.replace dom_id(@parameter), partial: "parameter", locals: { parameter: @parameter, project: @project } %>
+<%= render_turbo_stream_flash_messages %>

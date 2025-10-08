@@ -19,6 +19,8 @@ When('I visit the {string} section') do |section|
     click_link "Effort Breakdown"
   when "Categories"
     click_link "Categories"
+  when "Parameters"
+    click_link "Parameters"
   else
     raise "Unknown section: #{section}"
   end

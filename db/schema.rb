@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_29_122415) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_08_130050) do
   create_table "categories", force: :cascade do |t|
     t.string "title"
     t.integer "category_type"
@@ -41,6 +41,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_29_122415) do
     t.index ["project_id"], name: "index_efforts_on_project_id"
   end
 
+  create_table "parameters", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.string "title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id", "title"], name: "index_parameters_on_project_id_and_title", unique: true
+    t.index ["project_id"], name: "index_parameters_on_project_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -50,4 +59,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_29_122415) do
 
   add_foreign_key "categories", "projects"
   add_foreign_key "efforts", "projects"
+  add_foreign_key "parameters", "projects"
 end
