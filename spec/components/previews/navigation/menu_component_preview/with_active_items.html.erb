@@ -1,0 +1,8 @@
+<%= render Navigation::MenuComponent.new do |menu| %>
+  <% menu.with_item(label: "Projects", href: "/projects", active: true) do |item| %>
+    <% item.with_subitem(label: "Overview", href: "/projects/1", active: true) %>
+    <% item.with_subitem(label: "Effort Breakdown", href: "/projects/1/efforts") %>
+    <% item.with_subitem(label: "Categories", href: "/projects/1/categories") %>
+  <% end %>
+  <% menu.with_item(label: "Settings", href: "/settings") %>
+<% end %>

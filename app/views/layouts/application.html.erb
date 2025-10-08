@@ -36,27 +36,13 @@
         </main>
       </div>
       <div class="drawer-side">
-        <div class="p-4">
-          <h3 class="text-lg font-semibold mb-4">Menu</h3>
-          <ul class="menu bg-base-200 rounded-box w-56">
-            <li>
-              <%= link_to "Projects", projects_path %>
-              <ul>
-                <% if @project&.persisted? %>
-                  <li>
-                    <%= link_to "Overview", @project %>
-                  </li>
-                  <li>
-                    <%= link_to "Effort Breakdown", project_efforts_path(@project) %>
-                  </li>
-                  <li>
-                    <%= link_to "Categories", project_categories_path(@project) %>
-                  </li>
-                <% end %>
-              </ul>
-            </li>
-          </ul>
-        </div>
+        <%= render Navigation::MenuComponent.new do |menu| %>
+          <% menu.with_record_item(label: "Projects", index_href: projects_path, record: @project) do |item| %>
+            <% item.with_subitem(label: "Overview", href: project_path(@project)) %>
+            <% item.with_subitem(label: "Effort Breakdown", href: project_efforts_path(@project)) %>
+            <% item.with_subitem(label: "Categories", href: project_categories_path(@project)) %>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </body>

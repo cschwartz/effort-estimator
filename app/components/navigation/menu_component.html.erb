@@ -1,0 +1,8 @@
+<div class="p-4">
+  <h3 class="text-lg font-semibold mb-4"><%= @title %></h3>
+  <ul class="<%= menu_class %>">
+    <% items.each do |item| %>
+      <%= item %>
+    <% end %>
+  </ul>
+</div>

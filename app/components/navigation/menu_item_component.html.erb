@@ -1,0 +1,10 @@
+<li>
+  <%= link_to @label, @href, class: (@active ? "active" : nil) %>
+  <% if has_subitems? %>
+    <ul>
+      <% subitems.each do |subitem| %>
+        <%= subitem %>
+      <% end %>
+    </ul>
+  <% end %>
+</li>

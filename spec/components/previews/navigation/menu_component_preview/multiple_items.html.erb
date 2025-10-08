@@ -1,0 +1,12 @@
+<%= render Navigation::MenuComponent.new(title: "Main Navigation") do |menu| %>
+  <% menu.with_item(label: "Dashboard", href: "/") %>
+  <% menu.with_item(label: "Projects", href: "/projects") do |item| %>
+    <% item.with_subitem(label: "Active", href: "/projects/active") %>
+    <% item.with_subitem(label: "Archived", href: "/projects/archived") %>
+  <% end %>
+  <% menu.with_item(label: "Reports", href: "/reports") do |item| %>
+    <% item.with_subitem(label: "Summary", href: "/reports/summary") %>
+    <% item.with_subitem(label: "Detailed", href: "/reports/detailed") %>
+  <% end %>
+  <% menu.with_item(label: "Settings", href: "/settings") %>
+<% end %>

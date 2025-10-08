@@ -1,0 +1,8 @@
+<% project = Project.new(id: 1, title: "Test Project") %>
+<%= render Navigation::MenuComponent.new(title: "Project Menu") do |menu| %>
+  <% menu.with_record_item(label: "Projects", index_href: "/projects", record: project) do |item| %>
+    <% item.with_subitem(label: "Overview", href: "/projects/1") %>
+    <% item.with_subitem(label: "Effort Breakdown", href: "/projects/1/efforts") %>
+    <% item.with_subitem(label: "Categories", href: "/projects/1/categories") %>
+  <% end %>
+<% end %>

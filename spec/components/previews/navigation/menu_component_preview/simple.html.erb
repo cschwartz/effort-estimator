@@ -1,0 +1,5 @@
+<%= render Navigation::MenuComponent.new do |menu| %>
+  <% menu.with_item(label: "Home", href: "/") %>
+  <% menu.with_item(label: "About", href: "/about") %>
+  <% menu.with_item(label: "Contact", href: "/contact") %>
+<% end %>
