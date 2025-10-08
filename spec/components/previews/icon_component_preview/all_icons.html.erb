@@ -1,0 +1,8 @@
+<div class="p-8 space-y-6">
+  <% IconComponent::ICONS.keys.each do |icon_name| %>
+    <div class="flex items-center gap-4 p-4 border rounded">
+      <%= render IconComponent.new(name: icon_name) %>
+      <span class="font-mono text-sm"><%= icon_name %></span>
+    </div>
+  <% end %>
+</div>

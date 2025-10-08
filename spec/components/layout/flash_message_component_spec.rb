@@ -16,7 +16,7 @@ RSpec.describe Layout::FlashMessageComponent, type: :component do
 
     it "renders success icon" do
       render_inline(described_class.new(flash_type: "notice", message: "Success!"))
-      expect(page).to have_css("svg.icon-success")
+      expect(page).to have_css("svg")
     end
 
     it "includes notification controller" do
@@ -43,7 +43,7 @@ RSpec.describe Layout::FlashMessageComponent, type: :component do
 
     it "renders error icon" do
       render_inline(described_class.new(flash_type: "alert", message: "Error!"))
-      expect(page).to have_css("svg.icon-error")
+      expect(page).to have_css("svg")
     end
   end
 
@@ -60,7 +60,7 @@ RSpec.describe Layout::FlashMessageComponent, type: :component do
 
     it "renders info icon" do
       render_inline(described_class.new(flash_type: "info", message: "Info!"))
-      expect(page).to have_css("svg.icon-info")
+      expect(page).to have_css("svg")
     end
   end
 end

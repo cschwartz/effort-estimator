@@ -1,0 +1,8 @@
+<div class="p-8 space-y-6">
+  <% IconComponent::SIZES.keys.each do |size| %>
+    <div class="flex items-center gap-4 p-4 border rounded">
+      <%= render IconComponent.new(name: :success, size: size) %>
+      <span class="font-mono text-sm"><%= size %> - <%= IconComponent::SIZES[size] %></span>
+    </div>
+  <% end %>
+</div>
