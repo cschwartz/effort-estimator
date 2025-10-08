@@ -1,6 +1,5 @@
-Given('I am logged in as a user {string} with roles') do |username, table|
-  # Skip authentication for now - in a real app this would set up user authentication
-end
+# Project-specific step definitions
+# Note: Common CRUD steps (create/edit/delete/see) are in common_steps.rb
 
 Given('the following projects exist') do |table|
   table.hashes.each do |project_attrs|
@@ -15,54 +14,14 @@ When('I visit the projects page') do
   visit projects_path
 end
 
-Then('I should see the project {string}') do |name|
-  expect(page).to have_css("tr.project td.title", text: name)
-end
-
 Then('I should see no projects') do
   expect(page).to have_css("#projects #empty", text: "No existing projects")
-end
-
-When('I choose to create a new project') do
-  click_link "Create"
-end
-
-When('I choose to edit the project {string}') do |project_name|
-  within(find(:xpath, "//tr[td/a[text()='#{project_name}']]")) do
-    click_link 'Edit'
-  end
-end
-
-When('I choose to delete the project {string}') do |project_name|
-  within(find(:xpath, "//tr[td/a[text()='#{project_name}']]")) do
-    click_button 'Delete'
-  end
 end
 
 When('I fill in the project form with the following properties') do |table|
   properties = table.rows_hash
   fill_in 'Title', with: properties['Title'] if properties.key?('Title')
   fill_in 'Description', with: properties['Description'] if properties.key?('Description')
-end
-
-When('I create the project') do
-  click_button 'Create Project'
-end
-
-When('I update the project') do
-  click_button 'Update Project'
-end
-
-Then('I should see the error message {string}') do |error_message|
-  expect(page).to have_css("form .alert-error", text: error_message)
-end
-
-Then('I should not see the project {string}') do |project_name|
-  expect(page).not_to have_css("tr.project td.title", text: project_name)
-end
-
-Then('I should see a status message {string}') do |message|
-  expect(page).to have_css(".alert", text: message)
 end
 
 When('I select the project {string}') do |link_text|
