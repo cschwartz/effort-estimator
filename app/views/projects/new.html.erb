@@ -1,7 +1,7 @@
 <div>
-  <%= render BreadcrumbsComponent.new(@project) %>
+  <%= render Layout::BreadcrumbsComponent.new(@project) %>
   <div class="project">
-    <%= render PageHeaderComponent.new(@project) %>
+    <%= render Layout::PageHeaderComponent.new(@project) %>
     <%= turbo_frame_tag @project do %>
       <%= render partial: "form", locals: {project: @project} %>
     <% end %>

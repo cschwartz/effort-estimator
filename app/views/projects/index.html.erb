@@ -1,16 +1,16 @@
 <div>
-  <%= render BreadcrumbsComponent.new(Project) %>
+  <%= render Layout::BreadcrumbsComponent.new(Project) %>
   <div class="projects">
-    <%= render PageHeaderComponent.new(Project) do |c| %>
+    <%= render Layout::PageHeaderComponent.new(Project) do |c| %>
       <% c.with_action do %>
-        <%= render CreateActionComponent.new(href: new_project_path, turbo_frame: dom_id(Project.new)) %>
+        <%= render Actions::CreateActionComponent.new(href: new_project_path, turbo_frame: dom_id(Project.new)) %>
       <% end %>
     <% end %>
     <%= turbo_frame_tag Project.new %>
     <div class="list">
-      <%= render TableComponent.new(
+      <%= render Table::TableComponent.new(
         collection: @projects,
-        row_component: ProjectRowComponent,
+        row_component: Table::Rows::ProjectRowComponent,
         headers: ["Title", "Actions"],
         id: "projects",
         empty_message: "No existing projects"

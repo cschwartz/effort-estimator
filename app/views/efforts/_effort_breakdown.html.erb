@@ -1,9 +1,9 @@
 <div>
-  <%= render BreadcrumbsComponent.new(@project, "Effort Breakdown") %>
+  <%= render Layout::BreadcrumbsComponent.new(@project, "Effort Breakdown") %>
   <div class="effort-breakdown">
-    <%= render PageHeaderComponent.new("Effort Breakdown") do |c| %>
+    <%= render Layout::PageHeaderComponent.new("Effort Breakdown") do |c| %>
       <% c.with_action do %>
-        <%= render CreateActionComponent.new(href: new_project_effort_path(@project), label: "Add Root Effort", turbo_frame: "effort-sidebar") %>
+        <%= render Actions::CreateActionComponent.new(href: new_project_effort_path(@project), label: "Add Root Effort", turbo_frame: "effort-sidebar") %>
       <% end %>
     <% end %>
     <div class="grid grid-cols-12 gap-6 h-screen">

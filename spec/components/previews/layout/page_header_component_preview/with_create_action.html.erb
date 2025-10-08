@@ -1,0 +1,5 @@
+<%= render Layout::PageHeaderComponent.new(Project) do |c| %>
+  <% c.with_action do %>
+    <%= render Actions::CreateActionComponent.new(href: "#", turbo_frame: "new_project") %>
+  <% end %>
+<% end %>

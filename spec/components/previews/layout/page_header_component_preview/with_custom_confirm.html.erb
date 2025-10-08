@@ -1,0 +1,5 @@
+<%= render Layout::PageHeaderComponent.new("Settings") do |c| %>
+  <% c.with_action do %>
+    <%= render Actions::DeleteActionComponent.new(href: "#", confirm: "This will delete all settings. Continue?") %>
+  <% end %>
+<% end %>

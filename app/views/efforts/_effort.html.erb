@@ -1,14 +1,14 @@
 <div class="effort">
-  <%= render PageHeaderComponent.new(@effort) do |c| %>
+  <%= render Layout::PageHeaderComponent.new(@effort) do |c| %>
     <% unless @is_edit %>
       <% c.with_action do %>
-        <%= render CreateActionComponent.new(href: new_project_effort_path(@project, parent_id: @effort.id), label: "Add Child", turbo_frame: "effort-sidebar") %>
+        <%= render Actions::CreateActionComponent.new(href: new_project_effort_path(@project, parent_id: @effort.id), label: "Add Child", turbo_frame: "effort-sidebar") %>
       <% end %>
       <% c.with_action do %>
-        <%= render EditActionComponent.new(href: edit_project_effort_path(@project, @effort), turbo_frame: "effort-sidebar") %>
+        <%= render Actions::EditActionComponent.new(href: edit_project_effort_path(@project, @effort), turbo_frame: "effort-sidebar") %>
       <% end %>
       <% c.with_action do %>
-        <%= render DeleteActionComponent.new(href: project_effort_path(@project, @effort)) %>
+        <%= render Actions::DeleteActionComponent.new(href: project_effort_path(@project, @effort)) %>
       <% end %>
     <% end %>
   <% end %>

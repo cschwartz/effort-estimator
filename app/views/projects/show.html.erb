@@ -1,12 +1,12 @@
 <div>
-  <%= render BreadcrumbsComponent.new(@project) %>
+  <%= render Layout::BreadcrumbsComponent.new(@project) %>
   <div class="project">
-    <%= render PageHeaderComponent.new(@project) do |c| %>
+    <%= render Layout::PageHeaderComponent.new(@project) do |c| %>
       <% c.with_action do %>
-        <%= render EditActionComponent.new(href: edit_project_path(@project), turbo_frame: dom_id(Project.new)) %>
+        <%= render Actions::EditActionComponent.new(href: edit_project_path(@project), turbo_frame: dom_id(Project.new)) %>
       <% end %>
       <% c.with_action do %>
-        <%= render DeleteActionComponent.new(href: project_path(@project)) %>
+        <%= render Actions::DeleteActionComponent.new(href: project_path(@project)) %>
       <% end %>
     <% end %>
     <div class="details bg-base-100 rounded-lg p-6">

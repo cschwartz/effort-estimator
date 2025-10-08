@@ -1,16 +1,16 @@
 <div>
-  <%= render BreadcrumbsComponent.new(@project, Category) %>
+  <%= render Layout::BreadcrumbsComponent.new(@project, Category) %>
   <div class="categories">
-    <%= render PageHeaderComponent.new(Category) do |c| %>
+    <%= render Layout::PageHeaderComponent.new(Category) do |c| %>
       <% c.with_action do %>
-        <%= render CreateActionComponent.new(href: new_project_category_path(@project), turbo_frame: dom_id(Category.new)) %>
+        <%= render Actions::CreateActionComponent.new(href: new_project_category_path(@project), turbo_frame: dom_id(Category.new)) %>
       <% end %>
     <% end %>
     <%= turbo_frame_tag Category.new %>
     <div class="list">
-      <%= render TableComponent.new(
+      <%= render Table::TableComponent.new(
         collection: @categories,
-        row_component: CategoryRowComponent,
+        row_component: Table::Rows::CategoryRowComponent,
         headers: ["Title", "Type", "Actions"],
         id: "categories",
         empty_message: "No existing categories",

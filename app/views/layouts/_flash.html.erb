@@ -1,3 +1,3 @@
 <% flash.each do |flash_type, message| %>
-  <%= render FlashMessageComponent.new(flash_type: flash_type, message: message) %>
+  <%= render Layout::FlashMessageComponent.new(flash_type: flash_type, message: message) %>
 <% end %>

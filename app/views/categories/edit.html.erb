@@ -1,7 +1,7 @@
 <div>
-  <%= render BreadcrumbsComponent.new(@project, @category, "Edit") %>
+  <%= render Layout::BreadcrumbsComponent.new(@project, @category, "Edit") %>
   <div class="category">
-    <%= render PageHeaderComponent.new(@category) %>
+    <%= render Layout::PageHeaderComponent.new(@category) %>
     <%= turbo_frame_tag Category.new do %>
       <%= render partial: "form", locals: {project: @project, category: @category} %>
     <% end %>

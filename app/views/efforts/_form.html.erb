@@ -1,5 +1,5 @@
 <%= simple_form_for [@project, @effort], wrapper: :vertical_form do |f| %>
-  <%= render FormErrorsComponent.new(@effort) %>
+  <%= render Forms::FormErrorsComponent.new(@effort) %>
   <%= f.input :title, input_html: { autofocus: true } %>
   <%= f.input :description %>
   <%= f.hidden_field :parent_id %>

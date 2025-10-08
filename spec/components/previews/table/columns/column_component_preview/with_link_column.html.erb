@@ -1,0 +1,17 @@
+<table class="table table-zebra w-full">
+  <thead>
+    <tr>
+      <td>Link</td>
+    </tr>
+  </thead>
+  <tr>
+    <td>
+      <%= render Table::Columns::LinkColumnComponent.new(
+       header: "Title",
+       value: -> { "Edit Item" },
+       href: -> { "/items/1/edit" },
+       turbo_frame: "item_form"
+     ) %>
+    </td>
+  </tr>
+</table>

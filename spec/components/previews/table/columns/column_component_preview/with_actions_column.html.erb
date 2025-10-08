@@ -1,0 +1,24 @@
+<table class="table table-zebra w-full">
+  <thead>
+    <tr>
+      <td>Actions</td>
+    </tr>
+  </thead>
+  <tr>
+    <td>
+      <%= render Table::Columns::ActionsColumnComponent.new(
+        actions: [
+          Actions::EditActionComponent.new(
+            href: "/items/1/edit",
+            turbo_frame: "item_form",
+            size: :xs
+          ),
+          Actions::DeleteActionComponent.new(
+            href: "/items/1",
+            size: :xs
+          )
+        ]
+      ) %>
+    </td>
+  </tr>
+</table>
