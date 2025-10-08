@@ -1,0 +1,6 @@
+<%= render Display::PropertyListComponent.new do |list| %>
+  <% list.with_property_badge(label: "Status", value: "active", variant: :success) %>
+  <% list.with_property_badge(label: "Priority", value: "high", variant: :error) %>
+  <% list.with_property_badge(label: "Category Type", value: "scaled", variant: :outline) %>
+  <% list.with_property_badge(label: "Size", value: "large", variant: :primary, size: :sm) %>
+<% end %>

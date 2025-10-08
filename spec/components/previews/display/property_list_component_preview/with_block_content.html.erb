@@ -1,0 +1,12 @@
+<%= render Display::PropertyListComponent.new do |list| %>
+  <% list.with_property_text(label: "Simple Text", value: "Regular value") %>
+  <% list.with_property_text(label: "Custom Content") do %>
+    <strong class="text-primary">This is custom HTML content</strong>
+  <% end %>
+  <% list.with_property_badge(label: "Custom Badge") do %>
+    <div class="flex gap-2">
+      <span class="badge badge-primary">Primary</span>
+      <span class="badge badge-secondary">Secondary</span>
+    </div>
+  <% end %>
+<% end %>

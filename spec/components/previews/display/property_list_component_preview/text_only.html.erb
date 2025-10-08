@@ -1,0 +1,6 @@
+<%= render Display::PropertyListComponent.new do |list| %>
+  <% list.with_property_text(label: "First Name", value: "Jane") %>
+  <% list.with_property_text(label: "Last Name", value: "Smith") %>
+  <% list.with_property_text(label: "Role", value: "Project Manager") %>
+  <% list.with_property_text(label: "Department", value: "Engineering") %>
+<% end %>

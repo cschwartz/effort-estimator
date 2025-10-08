@@ -1,0 +1,10 @@
+<%= render Display::PropertyListComponent.new do |list| %>
+  <% list.with_property_prose(
+    label: "Project Description",
+    value: "This is the main project description.\n\nIt contains multiple paragraphs of text that need proper formatting.\n\nThe prose property handles this beautifully with simple_format."
+  ) %>
+  <% list.with_property_prose(
+    label: "Notes",
+    value: "Additional notes about the project.\n\nThese are also formatted nicely."
+  ) %>
+<% end %>

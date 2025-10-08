@@ -1,0 +1,7 @@
+<%= render Display::PropertyListComponent.new do |list| %>
+  <% list.with_property_timestamp(label: "Created (Long)", value: Time.zone.now - 30.days, format: :long) %>
+  <% list.with_property_timestamp(label: "Updated (Long)", value: Time.zone.now - 2.hours, format: :long) %>
+  <% list.with_property_timestamp(label: "Published (Short)", value: Time.zone.now - 7.days, format: :short) %>
+  <% list.with_property_timestamp(label: "Date Only", value: Time.zone.now - 1.day, format: :date) %>
+  <% list.with_property_timestamp(label: "Time Only", value: Time.zone.now, format: :time) %>
+<% end %>

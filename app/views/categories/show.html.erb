@@ -9,29 +9,10 @@
         <%= render Actions::DeleteActionComponent.new(href: project_category_path(@project, @category)) %>
       <% end %>
     <% end %>
-    <div class="details bg-base-100 rounded-lg p-6">
-      <dl class="space-y-4">
-        <div class="property-row">
-          <dt class="text-sm font-medium text-base-content/70 block mb-1">Type</dt>
-          <dd class="category-type">
-            <span class="badge badge-outline badge-lg">
-              <%= @category.category_type.humanize %>
-            </span>
-          </dd>
-        </div>
-        <div class="property-row">
-          <dt class="text-sm font-medium text-base-content/70 block mb-1">Created</dt>
-          <dd class="text-sm text-base-content/80">
-            <%= @category.created_at.strftime("%B %d, %Y at %I:%M %p") %>
-          </dd>
-        </div>
-        <div class="property-row">
-          <dt class="text-sm font-medium text-base-content/70 block mb-1">Last Updated</dt>
-          <dd class="text-sm text-base-content/80">
-            <%= @category.updated_at.strftime("%B %d, %Y at %I:%M %p") %>
-          </dd>
-        </div>
-      </dl>
-    </div>
+    <%= render Display::PropertyListComponent.new do |list| %>
+      <% list.with_property_badge(label: "Type", value: @category.category_type, css_class: "category-type") %>
+      <% list.with_property_timestamp(label: "Created", value: @category.created_at) %>
+      <% list.with_property_timestamp(label: "Last Updated", value: @category.updated_at) %>
+    <% end %>
   </div>
 </div>

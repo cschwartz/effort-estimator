@@ -1,0 +1,9 @@
+<%= render Display::PropertyListComponent.new do |list| %>
+  <% list.with_property_text(label: "Name", value: "John Doe") %>
+  <% list.with_property_text(label: "Email", value: "john.doe@example.com") %>
+  <% list.with_property_prose(label: "Description", value: "This is a longer description.\n\nIt has multiple paragraphs and will be formatted nicely.") %>
+  <% list.with_property_badge(label: "Status", value: "active") %>
+  <% list.with_property_badge(label: "Type", value: "scaled") %>
+  <% list.with_property_timestamp(label: "Created", value: Time.zone.now - 7.days) %>
+  <% list.with_property_timestamp(label: "Updated", value: Time.zone.now) %>
+<% end %>

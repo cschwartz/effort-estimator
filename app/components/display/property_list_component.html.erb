@@ -1,0 +1,15 @@
+<% if wrapper? %>
+  <div class="details bg-base-100 rounded-lg p-6">
+    <dl class="space-y-4">
+      <% properties.each do |property| %>
+        <%= property %>
+      <% end %>
+    </dl>
+  </div>
+<% else %>
+  <dl class="space-y-4">
+    <% properties.each do |property| %>
+      <%= property %>
+    <% end %>
+  </dl>
+<% end %>

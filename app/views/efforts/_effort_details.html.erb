@@ -1,10 +1,5 @@
 <div id="effort-details">
-  <dl class="space-y-4">
-    <div class="property-row">
-      <dt class="text-sm font-medium text-base-content/70 block mb-1">Description</dt>
-      <dd class="description prose prose-sm max-w-none bg-base-200 rounded p-3">
-        <%= simple_format(effort.description) %>
-      </dd>
-    </div>
-  </dl>
+  <%= render Display::PropertyListComponent.new(wrapper: false) do |list| %>
+    <% list.with_property_prose(label: "Description", value: effort.description, css_class: "description prose prose-sm max-w-none bg-base-200 rounded p-3") %>
+  <% end %>
 </div>

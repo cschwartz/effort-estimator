@@ -1,0 +1,12 @@
+<div class="property-row">
+  <dt class="text-sm font-medium text-base-content/70 block mb-1"><%= @label %></dt>
+  <dd class="<%= dd_class %>">
+    <% if content.present? %>
+      <%= content %>
+    <% else %>
+      <span class="<%= badge_classes %>">
+        <%= @value.to_s.humanize %>
+      </span>
+    <% end %>
+  </dd>
+</div>
