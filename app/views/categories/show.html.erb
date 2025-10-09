@@ -1,18 +1,14 @@
-<div>
-  <%= render Layout::BreadcrumbsComponent.new(@project, @category) %>
-  <div class="category">
-    <%= render Layout::PageHeaderComponent.new(@category) do |c| %>
-      <% c.with_action do %>
-        <%= render Actions::EditActionComponent.new(href: edit_project_category_path(@project, @category), turbo_frame: dom_id(Project.new)) %>
-      <% end %>
-      <% c.with_action do %>
-        <%= render Actions::DeleteActionComponent.new(href: project_category_path(@project, @category)) %>
-      <% end %>
-    <% end %>
-    <%= render Display::PropertyListComponent.new do |list| %>
-      <% list.with_property_badge(label: "Type", value: @category.category_type, css_class: "category-type") %>
-      <% list.with_property_timestamp(label: "Created", value: @category.created_at) %>
-      <% list.with_property_timestamp(label: "Last Updated", value: @category.updated_at) %>
-    <% end %>
-  </div>
-</div>
+<%= render Layout::ShowViewComponent.new(
+  record: @category,
+  parent_resources: [@project],
+  actions: [
+    render(Actions::EditActionComponent.new(href: edit_project_category_path(@project, @category), turbo_frame: dom_id(Category.new))),
+    render(Actions::DeleteActionComponent.new(href: project_category_path(@project, @category)))
+  ]
+) do %>
+  <%= render Display::PropertyListComponent.new do |list| %>
+    <% list.with_property_badge(label: "Type", value: @category.category_type, css_class: "category-type") %>
+    <% list.with_property_timestamp(label: "Created", value: @category.created_at) %>
+    <% list.with_property_timestamp(label: "Last Updated", value: @category.updated_at) %>
+  <% end %>
+<% end %>

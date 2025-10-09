@@ -1,0 +1,24 @@
+<div>
+  <%= render Layout::BreadcrumbsComponent.new(*breadcrumb_parts) %>
+  <div class="<%= resource_name_plural %>">
+    <%= render Layout::PageHeaderComponent.new(resource_class) do |c| %>
+      <% c.with_action do %>
+        <%= render Actions::CreateActionComponent.new(
+          href: new_path,
+          turbo_frame: helpers.dom_id(resource_class.new)
+        ) %>
+      <% end %>
+    <% end %>
+    <%= helpers.turbo_frame_tag resource_class.new %>
+    <div class="list">
+      <%= render Table::TableComponent.new(
+        collection: collection,
+        row_component: row_component,
+        headers: headers,
+        id: table_id,
+        empty_message: empty_message,
+        **row_options
+      ) %>
+    </div>
+  </div>
+</div>

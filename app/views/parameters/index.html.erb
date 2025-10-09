@@ -1,21 +1,8 @@
-<div>
-  <%= render Layout::BreadcrumbsComponent.new(@project, Parameter) %>
-  <div class="parameters">
-    <%= render Layout::PageHeaderComponent.new(Parameter) do |c| %>
-      <% c.with_action do %>
-        <%= render Actions::CreateActionComponent.new(href: new_project_parameter_path(@project), turbo_frame: dom_id(Parameter.new)) %>
-      <% end %>
-    <% end %>
-    <%= turbo_frame_tag Parameter.new %>
-    <div class="list">
-      <%= render Table::TableComponent.new(
-        collection: @parameters,
-        row_component: Table::Rows::ParameterRowComponent,
-        headers: ["Name", "Actions"],
-        id: "parameters",
-        empty_message: "No existing parameters",
-        project: @project
-      ) %>
-    </div>
-  </div>
-</div>
+<%= render Layout::IndexViewComponent.new(
+  resource_class: Parameter,
+  collection: @parameters,
+  row_component: Table::Rows::ParameterRowComponent,
+  headers: ["Title", "Actions"],
+  new_path: new_project_parameter_path(@project),
+  parent_resources: [@project]
+) %>

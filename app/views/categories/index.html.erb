@@ -1,21 +1,8 @@
-<div>
-  <%= render Layout::BreadcrumbsComponent.new(@project, Category) %>
-  <div class="categories">
-    <%= render Layout::PageHeaderComponent.new(Category) do |c| %>
-      <% c.with_action do %>
-        <%= render Actions::CreateActionComponent.new(href: new_project_category_path(@project), turbo_frame: dom_id(Category.new)) %>
-      <% end %>
-    <% end %>
-    <%= turbo_frame_tag Category.new %>
-    <div class="list">
-      <%= render Table::TableComponent.new(
-        collection: @categories,
-        row_component: Table::Rows::CategoryRowComponent,
-        headers: ["Title", "Type", "Actions"],
-        id: "categories",
-        empty_message: "No existing categories",
-        project: @project
-      ) %>
-    </div>
-  </div>
-</div>
+<%= render Layout::IndexViewComponent.new(
+  resource_class: Category,
+  collection: @categories,
+  row_component: Table::Rows::CategoryRowComponent,
+  headers: ["Title", "Type", "Actions"],
+  new_path: new_project_category_path(@project),
+  parent_resources: [@project]
+) %>

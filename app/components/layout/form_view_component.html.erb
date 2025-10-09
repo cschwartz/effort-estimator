@@ -1,0 +1,9 @@
+<div>
+  <%= render Layout::BreadcrumbsComponent.new(*breadcrumb_parts) %>
+  <div class="<%= resource_name %>">
+    <%= render Layout::PageHeaderComponent.new(record) %>
+    <%= helpers.turbo_frame_tag turbo_frame_tag_record do %>
+      <%= content %>
+    <% end %>
+  </div>
+</div>

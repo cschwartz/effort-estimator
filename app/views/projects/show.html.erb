@@ -1,16 +1,11 @@
-<div>
-  <%= render Layout::BreadcrumbsComponent.new(@project) %>
-  <div class="project">
-    <%= render Layout::PageHeaderComponent.new(@project) do |c| %>
-      <% c.with_action do %>
-        <%= render Actions::EditActionComponent.new(href: edit_project_path(@project), turbo_frame: dom_id(Project.new)) %>
-      <% end %>
-      <% c.with_action do %>
-        <%= render Actions::DeleteActionComponent.new(href: project_path(@project)) %>
-      <% end %>
-    <% end %>
-    <%= render Display::PropertyListComponent.new do |list| %>
-      <% list.with_property_prose(label: "Description", value: @project.description, css_class: "description prose prose-sm max-w-none bg-base-200 rounded p-3") %>
-    <% end %>
-  </div>
-</div>
+<%= render Layout::ShowViewComponent.new(
+  record: @project,
+  actions: [
+    render(Actions::EditActionComponent.new(href: edit_project_path(@project), turbo_frame: dom_id(Project.new))),
+    render(Actions::DeleteActionComponent.new(href: project_path(@project)))
+  ]
+) do %>
+  <%= render Display::PropertyListComponent.new do |list| %>
+    <% list.with_property_prose(label: "Description", value: @project.description, css_class: "description prose prose-sm max-w-none bg-base-200 rounded p-3") %>
+  <% end %>
+<% end %>

@@ -1,9 +1,3 @@
-<div>
-  <%= render Layout::BreadcrumbsComponent.new(@project, @parameter) %>
-  <div class="parameter">
-    <%= render Layout::PageHeaderComponent.new(@parameter) %>
-    <%= turbo_frame_tag @parameter do %>
-      <%= render partial: "form", locals: {project: @project, parameter: @parameter} %>
-    <% end %>
-  </div>
-</div>
+<%= render Layout::FormViewComponent.new(record: @parameter, parent_resources: [@project]) do %>
+  <%= render partial: "form", locals: {project: @project, parameter: @parameter} %>
+<% end %>

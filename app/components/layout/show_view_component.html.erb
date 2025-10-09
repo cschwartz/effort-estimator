@@ -1,0 +1,13 @@
+<div>
+  <%= render Layout::BreadcrumbsComponent.new(*breadcrumb_parts) %>
+  <div class="<%= resource_name %>">
+    <%= render Layout::PageHeaderComponent.new(record) do |c| %>
+      <% actions.each do |action| %>
+        <% c.with_action do %>
+          <%= action %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= content %>
+  </div>
+</div>

@@ -1,11 +1,10 @@
-<div>
-  <%= render Layout::BreadcrumbsComponent.new(@project, @parameter) %>
-  <div class="parameter">
-    <%= render Layout::PageHeaderComponent.new(@parameter) %>
-    <%= render Display::PropertyListComponent.new do |list| %>
-      <% list.with_property_text(label: "Title", value: @parameter.title) %>
-      <% list.with_property_timestamp(label: "Created", value: @parameter.created_at) %>
-      <% list.with_property_timestamp(label: "Updated", value: @parameter.updated_at) %>
-    <% end %>
-  </div>
-</div>
+<%= render Layout::ShowViewComponent.new(
+  record: @parameter,
+  parent_resources: [@project]
+) do %>
+  <%= render Display::PropertyListComponent.new do |list| %>
+    <% list.with_property_text(label: "Title", value: @parameter.title) %>
+    <% list.with_property_timestamp(label: "Created", value: @parameter.created_at) %>
+    <% list.with_property_timestamp(label: "Updated", value: @parameter.updated_at) %>
+  <% end %>
+<% end %>
