@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   mount Lookbook::Engine, at: "/lookbook" if Rails.env.development?
 
   root "projects#index"

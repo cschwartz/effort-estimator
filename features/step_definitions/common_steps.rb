@@ -1,13 +1,21 @@
 # Common step definitions shared across multiple features
 
+include Warden::Test::Helpers
+
 # Authentication
 Given('I am logged in as a user {string} with roles') do |username, table|
-  # Skip authentication for now - in a real app this would set up user authentication
+  user = User.create!(
+    email: "#{username}@example.com",
+    password: "password123",
+    password_confirmation: "password123"
+  )
+
+  login_as user, scope: :user, run_callbacks: false
 end
 
 # Navigation - generic for all resources using TableComponent
 When(/^I choose to create a new (category|parameter|project)$/) do |resource|
-  click_link "Create"
+    click_link "Create"
 end
 
 # Messages and Alerts

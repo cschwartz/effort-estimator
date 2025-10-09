@@ -79,3 +79,5 @@ gem "closure_tree"
 gem "tailwindcss-ruby", "~> 4.1"
 
 gem "view_component"
+
+gem "devise"

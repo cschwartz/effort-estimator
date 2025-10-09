@@ -1,8 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe EffortsController, type: :controller do
+  let(:user) { create(:user) }
   let(:project) { create(:project) }
   let(:effort) { create(:effort, project: project, title: "Original Title") }
+
+  before do
+    sign_in user
+  end
 
   describe '#update' do
     before do

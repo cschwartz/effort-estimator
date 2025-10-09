@@ -1,8 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "Projects", type: :request do
+  let(:user) { create(:user) }
   let(:turbo_stream_headers) { { "Accept" => "text/vnd.turbo-stream.html" } }
   let(:turbo_stream_content_type) { "text/vnd.turbo-stream.html" }
+
+  before do
+    sign_in user
+  end
 
   describe "GET /projects" do
     it "returns a successful response" do

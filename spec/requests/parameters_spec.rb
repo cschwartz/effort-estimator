@@ -1,9 +1,14 @@
 require "rails_helper"
 
 RSpec.describe "Parameters", type: :request do
+  let(:user) { create(:user) }
   let(:turbo_stream_headers) { { "Accept" => "text/vnd.turbo-stream.html" } }
   let(:turbo_stream_content_type) { "text/vnd.turbo-stream.html" }
   let(:project) { create(:project) }
+
+  before do
+    sign_in user
+  end
 
   describe "GET /projects/:project_id/parameters" do
     it "returns a successful response" do
