@@ -1,0 +1,26 @@
+<%
+  project = Project.new(id: 1, title: "Sample Project", description: "Description for Sample Project")
+  project.define_singleton_method(:persisted?) { true }
+  project.define_singleton_method(:created_at) { Time.current }
+  project.define_singleton_method(:updated_at) { Time.current }
+%>
+<%= render Layout::ShowViewComponent.new(
+  record: project,
+  actions: [
+    render(Actions::EditActionComponent.new(
+      href: "/projects/1/edit",
+      turbo_frame: "new_project"
+    )),
+    render(Actions::DeleteActionComponent.new(
+      href: "/projects/1"
+    ))
+  ]
+) do %>
+  <%= render Display::PropertyListComponent.new do |list| %>
+    <% list.with_property_prose(
+      label: "Description",
+      value: "This is a sample project description with multiple paragraphs.\n\nIt demonstrates how the prose property displays longer text content.",
+      css_class: "description prose prose-sm max-w-none bg-base-200 rounded p-3"
+    ) %>
+  <% end %>
+<% end %>

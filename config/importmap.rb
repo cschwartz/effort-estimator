@@ -11,3 +11,4 @@ pin "sortablejs" # @1.15.6
 pin "@stimulus-components/reveal", to: "@stimulus-components--reveal.js" # @5.0.0
 pin "@stimulus-components/notification", to: "@stimulus-components--notification.js" # @3.0.0
 pin "stimulus-use" # @0.52.3
+pin "@stimulus-components/rails-nested-form", to: "@stimulus-components--rails-nested-form.js" # @5.0.0

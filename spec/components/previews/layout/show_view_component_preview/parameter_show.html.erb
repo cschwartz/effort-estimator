@@ -1,0 +1,21 @@
+<%
+  project = Project.new(id: 1, title: "Sample Project", description: "Description for Sample Project")
+  project.define_singleton_method(:persisted?) { true }
+  project.define_singleton_method(:created_at) { Time.current }
+  project.define_singleton_method(:updated_at) { Time.current }
+
+  parameter = Parameter.new(id: 1, title: "Team Size", project: project)
+  parameter.define_singleton_method(:persisted?) { true }
+  parameter.define_singleton_method(:created_at) { Time.current }
+  parameter.define_singleton_method(:updated_at) { Time.current }
+%>
+<%= render Layout::ShowViewComponent.new(
+  record: parameter,
+  parent_resources: [ project ]
+) do %>
+  <%= render Display::PropertyListComponent.new do |list| %>
+    <% list.with_property_text(label: "Title", value: "Team Size") %>
+    <% list.with_property_timestamp(label: "Created", value: Time.current - 3.days) %>
+    <% list.with_property_timestamp(label: "Updated", value: Time.current) %>
+  <% end %>
+<% end %>

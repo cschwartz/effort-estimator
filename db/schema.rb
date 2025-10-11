@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_09_071707) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_09_171002) do
   create_table "categories", force: :cascade do |t|
     t.string "title"
     t.integer "category_type"
@@ -39,6 +39,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_071707) do
     t.index ["parent_id"], name: "index_efforts_on_parent_id"
     t.index ["project_id", "position"], name: "index_efforts_on_project_id_and_position"
     t.index ["project_id"], name: "index_efforts_on_project_id"
+  end
+
+  create_table "estimation_option_values", force: :cascade do |t|
+    t.integer "estimation_option_id", null: false
+    t.integer "value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["estimation_option_id", "value"], name: "idx_on_estimation_option_id_value_2bb08323cb", unique: true
+    t.index ["estimation_option_id"], name: "index_estimation_option_values_on_estimation_option_id"
+  end
+
+  create_table "estimation_options", force: :cascade do |t|
+    t.string "title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_estimation_options_on_title", unique: true
   end
 
   create_table "parameters", force: :cascade do |t|
@@ -71,5 +87,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_071707) do
 
   add_foreign_key "categories", "projects"
   add_foreign_key "efforts", "projects"
+  add_foreign_key "estimation_option_values", "estimation_options"
   add_foreign_key "parameters", "projects"
 end

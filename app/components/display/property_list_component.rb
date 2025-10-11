@@ -6,6 +6,7 @@ module Display
       text: "Display::Properties::TextPropertyComponent",
       prose: "Display::Properties::ProsePropertyComponent",
       badge: "Display::Properties::BadgePropertyComponent",
+      badge_list: "Display::Properties::BadgeListPropertyComponent",
       timestamp: "Display::Properties::TimestampPropertyComponent"
     }
 

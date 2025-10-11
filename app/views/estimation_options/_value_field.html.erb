@@ -1,0 +1,9 @@
+<%= render Forms::NestedFormFieldComponent.new(form: nested_form) do %>
+  <%= nested_form.input :value,
+                       label: false,
+                       wrapper: false,
+                       input_html: {
+                         class: "input input-sm input-bordered w-full",
+                         placeholder: "Enter value (e.g., 1, 2, 3, 5, 8)"
+                       } %>
+<% end %>

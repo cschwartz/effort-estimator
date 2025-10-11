@@ -1,0 +1,16 @@
+<%= render Layout::ShowViewComponent.new(
+  record: @estimation_option,
+  actions: [
+    render(Actions::EditActionComponent.new(href: edit_estimation_option_path(@estimation_option), turbo_frame: dom_id(EstimationOption.new))),
+    render(Actions::DeleteActionComponent.new(href: estimation_option_path(@estimation_option)))
+  ]
+) do %>
+  <%= render Display::PropertyListComponent.new do |list| %>
+    <% list.with_property_text(label: "Title", value: @estimation_option.title, css_class: "name") %>
+    <% list.with_property_badge_list(
+      label: "Values",
+      values: @estimation_option.estimation_option_values.map(&:value),
+      css_class: "values"
+    ) %>
+  <% end %>
+<% end %>

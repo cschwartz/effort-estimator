@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   root "projects#index"
 
+  resources :estimation_options
   resources :projects do
     resources :efforts
     resources :categories

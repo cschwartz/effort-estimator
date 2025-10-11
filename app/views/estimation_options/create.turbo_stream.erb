@@ -1,0 +1,4 @@
+<%= turbo_stream.update EstimationOption.new, "" %>
+<%= turbo_stream.append "estimation_options", render(@estimation_option) %>
+<%= turbo_stream.remove "empty" %>
+<%= render_turbo_stream_flash_messages %>

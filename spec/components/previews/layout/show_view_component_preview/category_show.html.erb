@@ -1,0 +1,30 @@
+<%
+  project = Project.new(id: 1, title: "Sample Project", description: "Description for Sample Project")
+  project.define_singleton_method(:persisted?) { true }
+  project.define_singleton_method(:created_at) { Time.current }
+  project.define_singleton_method(:updated_at) { Time.current }
+
+  category = Category.new(id: 1, title: "Conception", category_type: "scaled", project: project)
+  category.define_singleton_method(:persisted?) { true }
+  category.define_singleton_method(:created_at) { Time.current }
+  category.define_singleton_method(:updated_at) { Time.current }
+%>
+<%= render Layout::ShowViewComponent.new(
+  record: category,
+  parent_resources: [ project ],
+  actions: [
+    render(Actions::EditActionComponent.new(
+      href: "/projects/1/categories/1/edit",
+      turbo_frame: "new_category"
+    )),
+    render(Actions::DeleteActionComponent.new(
+      href: "/projects/1/categories/1"
+    ))
+  ]
+) do %>
+  <%= render Display::PropertyListComponent.new do |list| %>
+    <% list.with_property_badge(label: "Type", value: "scaled", css_class: "category-type") %>
+    <% list.with_property_timestamp(label: "Created", value: Time.current - 5.days) %>
+    <% list.with_property_timestamp(label: "Last Updated", value: Time.current) %>
+  <% end %>
+<% end %>

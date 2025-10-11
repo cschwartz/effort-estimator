@@ -4,6 +4,7 @@
   <% list.with_property_prose(label: "Description", value: "This is a longer description.\n\nIt has multiple paragraphs and will be formatted nicely.") %>
   <% list.with_property_badge(label: "Status", value: "active") %>
   <% list.with_property_badge(label: "Type", value: "scaled") %>
+  <% list.with_property_badge_list(label: "Values", values: [ 1, 2, 3, 5, 8, 13 ]) %>
   <% list.with_property_timestamp(label: "Created", value: Time.zone.now - 7.days) %>
   <% list.with_property_timestamp(label: "Updated", value: Time.zone.now) %>
 <% end %>

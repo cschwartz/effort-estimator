@@ -43,6 +43,7 @@
             <% item.with_subitem(label: "Categories", href: project_categories_path(@project)) %>
             <% item.with_subitem(label: "Parameters", href: project_parameters_path(@project)) %>
           <% end %>
+          <% menu.with_item(label: "Estimation Options", href: estimation_options_path) %>
         <% end %>
       </div>
     </div>

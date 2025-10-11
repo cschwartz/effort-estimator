@@ -1,0 +1,7 @@
+<%= render Layout::IndexViewComponent.new(
+  resource_class: EstimationOption,
+  collection: @estimation_options,
+  row_component: Table::Rows::EstimationOptionRowComponent,
+  headers: ["Title", "Values", "Actions"],
+  new_path: new_estimation_option_path
+) %>

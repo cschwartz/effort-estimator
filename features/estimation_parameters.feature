@@ -38,7 +38,7 @@ Feature: Manage Estimation Parameters
       When I visit the projects page
       And I select the project "Software Development Project"
       And I visit the "Parameters" section
-      Then I should see the message "No existing parameters"
+      Then I should see the message "No existing Parameters"
 
   Rule: Create estimation parameters
 
@@ -73,7 +73,7 @@ Feature: Manage Estimation Parameters
       And I choose to create a new parameter
       And I fill in the parameter form with the following properties
         | Title |
-        |      |
+        |       |
       And I create the parameter
       Then I should see the error message "Title can't be blank"
 
@@ -137,7 +137,7 @@ Feature: Manage Estimation Parameters
       And I choose to edit the parameter "Team Size"
       And I fill in the parameter form with the following properties
         | Title |
-        |      |
+        |       |
       And I update the parameter
       Then I should see the error message "Title can't be blank"
 

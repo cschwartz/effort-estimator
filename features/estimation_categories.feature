@@ -39,7 +39,7 @@ Feature: Manage Estimation Categories
       When I visit the projects page
       And I select the project "Software Development Project"
       And I visit the "Categories" section
-      Then I should see the message "No existing categories"
+      Then I should see the message "No existing Categories"
 
   Rule: Create estimation categories
 

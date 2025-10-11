@@ -22,7 +22,7 @@ Feature: Manage Projects
       | projects:list   |
       | projects:create |
     When I visit the projects page
-    Then I should see no projects
+    Then I should see the message "No existing Projects"
 
   Scenario: View specific project
     Given I am logged in as a user "project-manager" with roles

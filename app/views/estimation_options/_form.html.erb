@@ -1,0 +1,23 @@
+<%= simple_form_for estimation_option,
+                    html: {
+                      data: {
+                        controller: "nested-form",
+                        nested_form_wrapper_selector_value: ".nested-form-wrapper"
+                      }
+                    },
+                    wrapper: :vertical_form do |f| %>
+  <%= render Forms::FormErrorsComponent.new(estimation_option) %>
+  <%= f.input :title, input_html: { autofocus: true } %>
+
+  <%= render Forms::NestedFormComponent.new(
+    form: f,
+    association_name: :estimation_option_values,
+    label: "Values",
+    field_partial: "estimation_options/value_field"
+  ) %>
+
+  <div class="mt-6">
+    <%= link_to "Cancel", estimation_options_path, class: "btn btn-warning" %>
+    <%= f.submit class: "btn btn-secondary" %>
+  </div>
+<% end %>

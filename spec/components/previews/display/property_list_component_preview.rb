@@ -14,6 +14,9 @@ module Display
     # @label Badge Property
     def badge; end
 
+    # @label Badge List Property
+    def badge_list; end
+
     # @label Timestamp Properties
     def timestamps; end
 

@@ -1,0 +1,3 @@
+<%= turbo_stream.update EstimationOption.new, "" %>
+<%= turbo_stream.replace dom_id(@estimation_option), render(@estimation_option) %>
+<%= render_turbo_stream_flash_messages %>

@@ -1,0 +1,7 @@
+<%= render Display::PropertyListComponent.new do |list| %>
+  <% list.with_property_text(label: "Title", value: "Fibonacci") %>
+  <% list.with_property_badge_list(label: "Values (Default)", values: [ 1, 2, 3, 5, 8, 13, 21, 34 ]) %>
+  <% list.with_property_badge_list(label: "Small Values", values: [ 1, 2, 3 ], size: :sm) %>
+  <% list.with_property_badge_list(label: "Primary Badges", values: [ "Low", "Medium", "High" ], variant: :primary) %>
+  <% list.with_property_badge_list(label: "Empty List (Hidden)", values: []) %>
+<% end %>

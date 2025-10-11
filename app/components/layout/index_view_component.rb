@@ -26,7 +26,7 @@ module Layout
     end
 
     def empty_message
-      "No existing #{resource_name_plural}"
+      "No existing #{resource_name_plural.humanize}"
     end
 
     def breadcrumb_parts

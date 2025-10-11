@@ -1,0 +1,31 @@
+<div class="mt-6">
+  <h3 class="text-lg font-semibold mb-4"><%= @label %></h3>
+
+  <div id="<%= @container_id %>" class="space-y-4">
+    <%= @form.simple_fields_for @association_name do |nested_form| %>
+      <%= render @field_partial, nested_form: nested_form %>
+    <% end %>
+    <div data-nested-form-target="target"></div>
+  </div>
+
+  <div class="mt-4">
+    <% if add_button? %>
+      <%= add_button %>
+    <% else %>
+      <button type="button"
+              data-action="nested-form#add"
+              data-nested-form-target="add"
+              class="btn btn-sm btn-outline">
+        <%= @add_button_label %>
+      </button>
+    <% end %>
+  </div>
+
+  <template data-nested-form-target="template">
+    <%= @form.simple_fields_for @association_name,
+                                association_model.new,
+                                child_index: "NEW_RECORD" do |nested_form| %>
+      <%= render @field_partial, nested_form: nested_form %>
+    <% end %>
+  </template>
+</div>
