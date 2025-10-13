@@ -1,0 +1,28 @@
+<%= simple_form_for form_example, url: "/lookbook", method: :get, html: { class: "space-y-6" } do |f| %>
+  <section>
+    <h2 class="text-2xl font-bold mb-4">Text Inputs</h2>
+    <%= f.input :text_field, label: "Text Input", placeholder: "Enter text..." %>
+    <%= f.input :email_field, as: :email, label: "Email Input", placeholder: "user@example.com" %>
+    <%= f.input :password_field, as: :password, label: "Password Input", placeholder: "••••••••" %>
+    <%= f.input :number_field, as: :integer, label: "Number Input", placeholder: "123" %>
+  </section>
+  <section>
+    <h2 class="text-2xl font-bold mb-4">Textarea</h2>
+    <%= f.input :textarea_field,
+                  as: :text,
+                  label: "Textarea Input",
+                  placeholder: "Enter longer text...",
+                  input_html: { rows: 4 } %>
+  </section>
+  <section>
+    <h2 class="text-2xl font-bold mb-4">Select Inputs</h2>
+    <%= f.input :select_field,
+              collection: ["Option 1", "Option 2", "Option 3"],
+              label: "Single Select",
+              prompt: "Choose an option...",
+              hint: 'Optional' %>
+    <div class="flex gap-4">
+      <%= f.button :submit, "Submit", class: "btn btn-secondary" %>
+      <%= link_to "Cancel", "#", class: "btn btn-warning" %>
+    </div>
+  <% end %>
