@@ -21,8 +21,19 @@
               label: "Single Select",
               prompt: "Choose an option...",
               hint: 'Optional' %>
-    <div class="flex gap-4">
-      <%= f.button :submit, "Submit", class: "btn btn-secondary" %>
-      <%= link_to "Cancel", "#", class: "btn btn-warning" %>
-    </div>
-  <% end %>
+  </section>
+  <section>
+    <h2 class="text-2xl font-bold mb-4">Boolean Inputs</h2>
+    <%= f.input :remember_me,
+                as: :boolean,
+                label: "Remember me",
+                hint: "(Stay logged in on this device)" %>
+    <%= f.input :newsletter,
+                as: :boolean,
+                label: "Subscribe to newsletter" %>
+  </section>
+  <div class="flex gap-4">
+    <%= f.button :submit, "Submit" %>
+    <%= link_to "Cancel", "#", class: "btn btn-warning" %>
+  </div>
+<% end %>

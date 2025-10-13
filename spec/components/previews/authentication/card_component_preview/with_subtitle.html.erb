@@ -1,0 +1,19 @@
+<%= render Authentication::CardComponent.new(
+  title: "Reset your password",
+  subtitle: "Enter your email address and we'll send you instructions"
+) do |component| %>
+  <% component.with_link do %>
+    <%= link_to "Back to login", "#", class: "link link-hover" %>
+  <% end %>
+
+  <div class="space-y-4">
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text">Email</span>
+      </label>
+      <input type="email" placeholder="you@example.com" class="input input-bordered w-full" />
+    </div>
+
+    <button type="submit" class="btn btn-primary w-full">Send reset instructions</button>
+  </div>
+<% end %>

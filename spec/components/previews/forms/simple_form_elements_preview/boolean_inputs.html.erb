@@ -1,0 +1,35 @@
+<div class="p-8 max-w-4xl mx-auto">
+  <h1 class="text-3xl font-bold mb-8">Boolean Inputs (Checkboxes) - DaisyUI</h1>
+  <%= simple_form_for form_example, url: "/lookbook", method: :get do |f| %>
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold mb-4">Checkboxes with Hints</h2>
+      <%= f.input :remember_me,
+                  as: :boolean,
+                  label: "Remember me",
+                  hint: "(Stay logged in on this device)" %>
+      <%= f.input :newsletter,
+                  as: :boolean,
+                  label: "Subscribe to newsletter",
+                  hint: "(Receive weekly updates and news)" %>
+      <%= f.input :terms,
+                  as: :boolean,
+                  label: "I accept the terms and conditions",
+                  hint: "(Required to create an account)" %>
+    </section>
+    <div class="divider"></div>
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold mb-4">Multiple Checkboxes</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <%= f.input :remember_me,
+                    as: :boolean,
+                    label: "Remember me" %>
+        <%= f.input :newsletter,
+                    as: :boolean,
+                    label: "Newsletter" %>
+      </div>
+    </section>
+    <div class="flex gap-4 mt-8">
+      <%= f.button :submit, "Submit" %>
+    </div>
+  <% end %>
+</div>

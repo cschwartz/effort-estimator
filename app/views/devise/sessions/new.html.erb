@@ -1,7 +1,10 @@
-<h2>Log in</h2>
+<%= render Authentication::CardComponent.new(
+  title: "Log in",
+  subtitle: "Welcome back! Please sign in to continue"
+) do |component| %>
+  <%= render "devise/shared/links", component: component %>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <%= f.input :email,
                 required: false,
                 autofocus: true,
@@ -10,11 +13,7 @@
                 required: false,
                 input_html: { autocomplete: "current-password" } %>
     <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-  </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
+    <%= f.button :submit, "Log in", class: "w-full" %>
+  <% end %>
 <% end %>
-
-<%= render "devise/shared/links" %>

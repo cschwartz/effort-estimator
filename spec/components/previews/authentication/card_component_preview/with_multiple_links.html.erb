@@ -1,0 +1,18 @@
+<%= render Authentication::CardComponent.new(title: "Account access") do |component| %>
+  <% component.with_link do %>
+    <%= link_to "Log in", "#", class: "link link-hover" %>
+  <% end %>
+  <% component.with_link do %>
+    <%= link_to "Sign up", "#", class: "link link-hover" %>
+  <% end %>
+  <% component.with_link do %>
+    <%= link_to "Forgot your password?", "#", class: "link link-hover" %>
+  <% end %>
+  <% component.with_link do %>
+    <%= link_to "Didn't receive confirmation instructions?", "#", class: "link link-hover" %>
+  <% end %>
+
+  <div class="text-center py-8">
+    <p class="text-base-content/70">Choose an option from the links below</p>
+  </div>
+<% end %>

@@ -12,6 +12,9 @@ module Forms
     attribute :number_field, :integer
     attribute :textarea_field, :string
     attribute :select_field, :string
+    attribute :remember_me, :boolean
+    attribute :newsletter, :boolean
+    attribute :terms, :boolean
 
     validates :text_field, presence: true
 
@@ -40,6 +43,12 @@ module Forms
   class SimpleFormElementsPreview < ViewComponent::Preview
     # @label All Input Types
     def all_input_types
+      @form_example = FormExample.new
+      render_with_template locals: {form_example: @form_example}
+    end
+
+    # @label Boolean Inputs
+    def boolean_inputs
       @form_example = FormExample.new
       render_with_template locals: {form_example: @form_example}
     end

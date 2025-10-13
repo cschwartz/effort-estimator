@@ -3,5 +3,5 @@
   <%= f.input :title, input_html: { autofocus: true } %>
   <%= f.input :category_type, collection: Category.category_types.keys.map { |key| [key.humanize, key] }, prompt: "Select type" %>
   <%= link_to "Cancel", project_categories_path(project), class: "btn btn-warning" %>
-  <%= f.submit class: "btn btn-secondary" %>
+  <%= f.submit %>
 <% end %>

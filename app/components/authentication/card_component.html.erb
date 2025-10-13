@@ -1,0 +1,28 @@
+<div class="min-h-screen flex items-center justify-center bg-base-200 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full">
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <div class="text-center mb-6">
+          <h2 class="text-3xl font-bold"><%= @title %></h2>
+          <% if @subtitle.present? %>
+            <p class="text-sm text-base-content/70 mt-2"><%= @subtitle %></p>
+          <% end %>
+        </div>
+
+        <%= content %>
+
+        <% if links? %>
+          <div class="divider"></div>
+          <div class="text-center text-sm">
+            <% links.each_with_index do |link, index| %>
+              <%= link %>
+              <% if index < links.size - 1 %>
+                <span class="mx-2 text-base-content/50">|</span>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

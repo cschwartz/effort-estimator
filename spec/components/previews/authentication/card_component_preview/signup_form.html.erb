@@ -1,0 +1,33 @@
+<%= render Authentication::CardComponent.new(title: "Sign up") do |component| %>
+  <% component.with_link do %>
+    <%= link_to "Already have an account? Log in", "#", class: "link link-hover" %>
+  <% end %>
+
+  <div class="space-y-4">
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text">Email</span>
+      </label>
+      <input type="email" placeholder="you@example.com" class="input input-bordered w-full" />
+    </div>
+
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text">Password</span>
+      </label>
+      <input type="password" placeholder="••••••••" class="input input-bordered w-full" />
+      <label class="label">
+        <span class="label-text-alt">6 characters minimum</span>
+      </label>
+    </div>
+
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text">Password confirmation</span>
+      </label>
+      <input type="password" placeholder="••••••••" class="input input-bordered w-full" />
+    </div>
+
+    <button type="submit" class="btn btn-primary w-full">Sign up</button>
+  </div>
+<% end %>
