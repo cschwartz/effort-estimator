@@ -4,13 +4,19 @@ include Warden::Test::Helpers
 
 # Authentication
 Given('I am logged in as a user {string} with roles') do |username, table|
+  Capybara.session_name = username if @is_multiuser_scenario
+
+  email = "#{username}@example.com"
+  password = "a-test-password-for-effort-estimator"
   user = User.create!(
-    email: "#{username}@example.com",
-    password: "password123",
-    password_confirmation: "password123"
+    email: email,
+    password: password,
+    password_confirmation: password
   )
 
   login_as user, scope: :user, run_callbacks: false
+
+  visit root_path
 end
 
 # Navigation - generic for all resources using TableComponent

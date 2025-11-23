@@ -1,4 +1,4 @@
-@javascript
+@javascript @US-04
 Feature: Manage Estimation Options
   As a system administrator
   I want to manage estimation options
@@ -12,6 +12,7 @@ Feature: Manage Estimation Options
       | estimation_options:update |
       | estimation_options:delete |
 
+  @US-04-AC-01
   Scenario: View all estimation options
     Given the following estimation options exist with values
       | title          | values             |
@@ -21,10 +22,12 @@ Feature: Manage Estimation Options
     Then I should see the estimation option "Fibonacci < 40"
     And I should see the estimation option "Small Integers"
 
+  @US-04-AC-01
   Scenario: View empty estimation options list
     When I visit the estimation options page
     Then I should see no estimation options
 
+  @US-04-AC-02
   Scenario: View estimation option details
     Given the following estimation option exists with values
       | title          | values                    |
@@ -34,6 +37,7 @@ Feature: Manage Estimation Options
     Then I should see estimation option details including the name "Fibonacci < 40"
     And I should see the values "1, 2, 3, 5, 8, 13, 21, 34" for the estimation option
 
+  @US-04-AC-03
   Scenario: Create new estimation option
     When I visit the estimation options page
     And I choose to create a new estimation option
@@ -43,6 +47,7 @@ Feature: Manage Estimation Options
     Then I should see a status message "Estimation option was successfully created."
     And I should see the estimation option "Fibonacci < 40"
 
+  @US-04-AC-03
   Scenario: Create estimation option without name
     When I visit the estimation options page
     And I choose to create a new estimation option
@@ -51,6 +56,7 @@ Feature: Manage Estimation Options
     And I create the estimation option
     Then I should see the error message "Title can't be blank"
 
+  @US-04-AC-03
   Scenario: Create duplicate estimation option name
     Given the following estimation options exist
       | title          |
@@ -62,6 +68,7 @@ Feature: Manage Estimation Options
     And I create the estimation option
     Then I should see the error message "Title has already been taken"
 
+  @US-04-AC-04
   Scenario: Update estimation option name
     Given the following estimation options exist
       | title         |
@@ -75,6 +82,7 @@ Feature: Manage Estimation Options
     And I should see the estimation option "Small Integers"
     And I should not see the estimation option "Small Numbers"
 
+  @US-04-AC-04
   Scenario: Update estimation option with empty name
     Given the following estimation options exist
       | title         |
@@ -86,6 +94,7 @@ Feature: Manage Estimation Options
     And I update the estimation option
     Then I should see the error message "Title can't be blank"
 
+  @US-04-AC-04
   Scenario: Update estimation option with duplicate name
     Given the following estimation options exist
       | title          |
@@ -98,6 +107,7 @@ Feature: Manage Estimation Options
     And I update the estimation option
     Then I should see the error message "Title has already been taken"
 
+  @US-04-AC-05
   Scenario: Delete unused estimation option
     Given the following estimation options exist with values
       | title         | values |
@@ -107,6 +117,7 @@ Feature: Manage Estimation Options
     Then I should see a status message "Estimation option was successfully deleted."
     And I should not see the estimation option "Small Numbers"
 
+  @US-04-AC-06
   Scenario: Add value to estimation option
     Given the following estimation options exist with values
       | title          | values    |
@@ -116,6 +127,7 @@ Feature: Manage Estimation Options
     Then I should see a status message "Estimation option was successfully updated."
     And I should see the value "13" in the estimation option
 
+  @US-04-AC-06
   Scenario: Add non-positive value to estimation option
     Given the following estimation options exist with values
       | title          | values  |
@@ -124,6 +136,7 @@ Feature: Manage Estimation Options
     And I add the value "0" to the estimation option
     Then I should see the error message "Estimation option values value must be greater than 0"
 
+  @US-04-AC-06
   Scenario: Add duplicate value to estimation option
     Given the following estimation options exist with values
       | title          | values  |
@@ -132,6 +145,7 @@ Feature: Manage Estimation Options
     And I add the value "5" to the estimation option
     Then I should see the error message "Estimation option values value has already been taken"
 
+  @US-04-AC-06
   Scenario: Remove value from estimation option
     Given the following estimation options exist with values
       | title          | values    |

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_09_171002) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_16_194702) do
   create_table "categories", force: :cascade do |t|
     t.string "title"
     t.integer "category_type"
@@ -18,6 +18,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_171002) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_categories_on_project_id"
+  end
+
+  create_table "effort_estimates", force: :cascade do |t|
+    t.integer "effort_id", null: false
+    t.integer "estimation_session_id", null: false
+    t.integer "category_id", null: false
+    t.integer "parameter_id"
+    t.integer "estimation_option_value_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0, null: false
+    t.index ["category_id"], name: "index_effort_estimates_on_category_id"
+    t.index ["effort_id", "estimation_session_id", "category_id"], name: "index_effort_estimates_uniqueness", unique: true
+    t.index ["effort_id"], name: "index_effort_estimates_on_effort_id"
+    t.index ["estimation_option_value_id"], name: "index_effort_estimates_on_estimation_option_value_id"
+    t.index ["estimation_session_id"], name: "index_effort_estimates_on_estimation_session_id"
+    t.index ["parameter_id"], name: "index_effort_estimates_on_parameter_id"
   end
 
   create_table "effort_hierarchies", id: false, force: :cascade do |t|
@@ -57,6 +74,38 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_171002) do
     t.index ["title"], name: "index_estimation_options_on_title", unique: true
   end
 
+  create_table "estimation_sessions", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.integer "estimation_option_id", null: false
+    t.integer "facilitator_id", null: false
+    t.integer "current_effort_id"
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["current_effort_id"], name: "index_estimation_sessions_on_current_effort_id"
+    t.index ["estimation_option_id"], name: "index_estimation_sessions_on_estimation_option_id"
+    t.index ["facilitator_id"], name: "index_estimation_sessions_on_facilitator_id"
+    t.index ["project_id", "status"], name: "index_estimation_sessions_on_project_id_and_status"
+    t.index ["project_id"], name: "index_estimation_sessions_on_project_id"
+  end
+
+  create_table "estimation_votes", force: :cascade do |t|
+    t.integer "effort_id", null: false
+    t.integer "estimation_session_id", null: false
+    t.integer "category_id", null: false
+    t.integer "user_id", null: false
+    t.integer "estimation_option_value_id", null: false
+    t.datetime "voted_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_estimation_votes_on_category_id"
+    t.index ["effort_id", "estimation_session_id", "category_id", "user_id"], name: "index_estimation_votes_uniqueness", unique: true
+    t.index ["effort_id"], name: "index_estimation_votes_on_effort_id"
+    t.index ["estimation_option_value_id"], name: "index_estimation_votes_on_estimation_option_value_id"
+    t.index ["estimation_session_id"], name: "index_estimation_votes_on_estimation_session_id"
+    t.index ["user_id"], name: "index_estimation_votes_on_user_id"
+  end
+
   create_table "parameters", force: :cascade do |t|
     t.integer "project_id", null: false
     t.string "title", null: false
@@ -73,6 +122,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_171002) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "session_participants", force: :cascade do |t|
+    t.integer "estimation_session_id", null: false
+    t.integer "user_id", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "joined_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["estimation_session_id", "user_id"], name: "idx_on_estimation_session_id_user_id_5646c3fa9f", unique: true
+    t.index ["estimation_session_id"], name: "index_session_participants_on_estimation_session_id"
+    t.index ["user_id"], name: "index_session_participants_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -86,7 +147,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_171002) do
   end
 
   add_foreign_key "categories", "projects"
+  add_foreign_key "effort_estimates", "categories"
+  add_foreign_key "effort_estimates", "efforts"
+  add_foreign_key "effort_estimates", "estimation_option_values"
+  add_foreign_key "effort_estimates", "estimation_sessions"
+  add_foreign_key "effort_estimates", "parameters"
   add_foreign_key "efforts", "projects"
   add_foreign_key "estimation_option_values", "estimation_options"
+  add_foreign_key "estimation_sessions", "efforts", column: "current_effort_id"
+  add_foreign_key "estimation_sessions", "estimation_options"
+  add_foreign_key "estimation_sessions", "projects"
+  add_foreign_key "estimation_sessions", "users", column: "facilitator_id"
+  add_foreign_key "estimation_votes", "categories"
+  add_foreign_key "estimation_votes", "efforts"
+  add_foreign_key "estimation_votes", "estimation_option_values"
+  add_foreign_key "estimation_votes", "estimation_sessions"
+  add_foreign_key "estimation_votes", "users"
   add_foreign_key "parameters", "projects"
+  add_foreign_key "session_participants", "estimation_sessions"
+  add_foreign_key "session_participants", "users"
 end

@@ -1,0 +1,6 @@
+<div class="participant flex items-center gap-2 p-2 bg-base-100 rounded">
+  <span><%= session_participant.user.email %></span>
+  <% if session_participant.is_facilitator? %>
+    <span class="badge badge-primary">Facilitator</span>
+  <% end %>
+</div>

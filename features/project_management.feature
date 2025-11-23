@@ -1,9 +1,10 @@
-@javascript
+@javascript @US-01
 Feature: Manage Projects
   As a user
   I want to manage projects
   So that I can estimate efforts for a project
 
+  @US-01-AC-01
   Scenario: View projects list
     Given I am logged in as a user "project-manager" with roles
       | role          |
@@ -16,14 +17,15 @@ Feature: Manage Projects
     Then I should see the project "Project Alpha"
     And I should see the project "Project Beta"
 
+  @US-01-AC-01
   Scenario: View empty projects list
     Given I am logged in as a user "project-manager" with roles
-      | role            |
-      | projects:list   |
-      | projects:create |
+      | role          |
+      | projects:list |
     When I visit the projects page
     Then I should see the message "No existing Projects"
 
+  @US-01-AC-02
   Scenario: View specific project
     Given I am logged in as a user "project-manager" with roles
       | role          |
@@ -39,6 +41,7 @@ Feature: Manage Projects
 
   Rule: Create projects
 
+    @US-01-AC-03
     Scenario: Create new project
       Given I am logged in as a user "project-manager" with roles
         | role            |
@@ -54,6 +57,7 @@ Feature: Manage Projects
       Then I should see a status message "Project was successfully created"
       And I should see the project "My First Project"
 
+    @US-01-AC-03
     Scenario: Create project without title
       Given I am logged in as a user "project-manager" with roles
         | role            |
@@ -70,6 +74,7 @@ Feature: Manage Projects
 
   Rule: Update projects
 
+    @US-01-AC-04
     Scenario: Update project
       Given I am logged in as a user "project-manager" with roles
         | role            |
@@ -88,6 +93,7 @@ Feature: Manage Projects
       Then I should see a status message "Project was successfully updated"
       And I should see project details including the title "Updated Project Title"
 
+    @US-01-AC-04
     Scenario: Update project with empty title
       Given I am logged in as a user "project-manager" with roles
         | role            |
@@ -107,6 +113,7 @@ Feature: Manage Projects
 
   Rule: Delete projects
 
+    @US-01-AC-05
     Scenario: Delete project
       Given I am logged in as a user "project-manager" with roles
         | role            |

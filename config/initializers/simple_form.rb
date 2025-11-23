@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 SimpleForm.setup do |config|
-  config.generate_additional_classes_for = [:input]
+  config.generate_additional_classes_for = [ :input ]
 
   config.button_class = "btn btn-primary"
 

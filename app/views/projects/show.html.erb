@@ -8,4 +8,13 @@
   <%= render Display::PropertyListComponent.new do |list| %>
     <% list.with_property_prose(label: "Description", value: @project.description, css_class: "description prose prose-sm max-w-none bg-base-200 rounded p-3") %>
   <% end %>
+
+  <div class="mt-4">
+    <% if @project.estimation_session.present? %>
+      <%= link_to "View Estimation Session", project_estimation_session_path(@project), class: "btn btn-primary" %>
+      <%= button_to "Join Estimation Session", project_estimation_session_session_participants_path(@project), method: :post, class: "btn btn-secondary" %>
+    <% else %>
+      <%= link_to "Start Estimation Session", new_project_estimation_session_path(@project), class: "btn btn-primary" %>
+    <% end %>
+  </div>
 <% end %>

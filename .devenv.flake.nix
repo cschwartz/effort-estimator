@@ -1,7 +1,7 @@
 {
   inputs =
     let
-      version = "1.9.1";
+      version = "1.10.0";
 system = "aarch64-darwin";
 devenv_root = "/Users/cschwartz/Documents/projects/effort-estimator";
 devenv_dotfile = "/Users/cschwartz/Documents/projects/effort-estimator/.devenv";
@@ -28,7 +28,7 @@ git_root = "/Users/cschwartz/Documents/projects/effort-estimator";
 
       outputs = { nixpkgs, ... }@inputs:
         let
-          version = "1.9.1";
+          version = "1.10.0";
 system = "aarch64-darwin";
 devenv_root = "/Users/cschwartz/Documents/projects/effort-estimator";
 devenv_dotfile = "/Users/cschwartz/Documents/projects/effort-estimator/.devenv";
@@ -82,7 +82,13 @@ git_root = "/Users/cschwartz/Documents/projects/effort-estimator";
                 then ./. + (builtins.substring 1 255 path)
                 else ./. + (builtins.substring 1 255 path) + "/devenv.nix"
                 else if lib.hasPrefix "../" path
-                then throw "devenv: ../ is not supported for imports"
+                then
+                # For parent directory paths, concatenate with /.
+                # ./. refers to the directory containing this file (project root)
+                # So ./. + "/../shared" = <project-root>/../shared
+                  if lib.hasSuffix ".nix" path
+                  then ./. + "/${path}"
+                  else ./. + "/${path}/devenv.nix"
                 else
                   let
                     paths = lib.splitString "/" path;
@@ -106,13 +112,13 @@ git_root = "/Users/cschwartz/Documents/projects/effort-estimator";
                     _module.args.pkgs = pkgs.appendOverlays (config.overlays or [ ]);
                   })
                   (inputs.devenv.modules + /top-level.nix)
-                  {
-                    devenv.cliVersion = version;
-                    devenv.root = devenv_root;
-                    devenv.dotfile = devenv_dotfile;
-                  }
                   ({ options, ... }: {
                     config.devenv = lib.mkMerge [
+                      {
+                        cliVersion = version;
+                        root = devenv_root;
+                        dotfile = devenv_dotfile;
+                      }
                       (pkgs.lib.optionalAttrs (builtins.hasAttr "tmpdir" options.devenv) {
                         tmpdir = devenv_tmpdir;
                       })
@@ -128,9 +134,9 @@ git_root = "/Users/cschwartz/Documents/projects/effort-estimator";
                     ];
                   })
                   ({ options, ... }: {
-                    config.git = lib.mkMerge [
+                    config = lib.mkMerge [
                       (pkgs.lib.optionalAttrs (builtins.hasAttr "git" options) {
-                        root = git_root;
+                        git.root = git_root;
                       })
                     ];
                   })

@@ -2,12 +2,13 @@
 
 module Layout
   class ShowViewComponent < ViewComponent::Base
-    attr_reader :record, :parent_resources, :actions
+    attr_reader :record, :parent_resources, :actions, :singular_resources
 
-    def initialize(record:, parent_resources: [], actions: [])
+    def initialize(record:, parent_resources: [], actions: [], singular_resources: [])
       @record = record
       @parent_resources = parent_resources
       @actions = actions
+      @singular_resources = singular_resources
     end
 
     def resource_name

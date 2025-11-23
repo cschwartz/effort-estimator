@@ -24,8 +24,13 @@ end
 
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+Before do |scenario|
+  tags = scenario.source_tag_names
+  @is_multiuser_scenario = tags.include? "@multiuser"
+end
+
 # Keep browser open for debugging when @debug tag is used
 After('@debug') do |scenario|
   puts "Debug mode: Browser will stay open. Press Enter to continue..."
-  binding.break
+  binding.debugger
 end

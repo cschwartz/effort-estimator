@@ -1,5 +1,5 @@
 <div>
-  <%= render Layout::BreadcrumbsComponent.new(*breadcrumb_parts) %>
+  <%= render Layout::BreadcrumbsComponent.new(*breadcrumb_parts, singular_resources: singular_resources) %>
   <div class="<%= resource_name %>">
     <%= render Layout::PageHeaderComponent.new(record) do |c| %>
       <% actions.each do |action| %>

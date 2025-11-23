@@ -1,4 +1,4 @@
-@javascript
+@javascript @US-02
 Feature: Manage Estimation Categories
   As a project manager
   I want to manage estimation categories for my project
@@ -6,6 +6,7 @@ Feature: Manage Estimation Categories
 
   Rule: View estimation categories
 
+    @US-02-AC-01
     Scenario: View all estimation categories
       Given I am logged in as a user "project-manager" with roles
         | role            |
@@ -27,6 +28,7 @@ Feature: Manage Estimation Categories
       And I should see the category "Implementation" with type "Scaled"
       And I should see the category "Hours" with type "Absolute"
 
+    @US-02-AC-01
     Scenario: View empty categories list
       Given I am logged in as a user "project-manager" with roles
         | role            |
@@ -43,6 +45,7 @@ Feature: Manage Estimation Categories
 
   Rule: Create estimation categories
 
+    @US-02-AC-02
     Scenario: Create new scaled estimation category
       Given I am logged in as a user "project-manager" with roles
         | role              |
@@ -64,6 +67,7 @@ Feature: Manage Estimation Categories
       Then I should see a status message "Category was successfully created"
       And I should see the category "Scaled Category" with type "Scaled"
 
+    @US-02-AC-02
     Scenario: Create new absolute estimation category
       Given I am logged in as a user "project-manager" with roles
         | role              |
@@ -85,6 +89,7 @@ Feature: Manage Estimation Categories
       Then I should see a status message "Category was successfully created"
       And I should see the category "Absolute Category" with type "Absolute"
 
+    @US-02-AC-02
     Scenario: Create category without title
       Given I am logged in as a user "project-manager" with roles
         | role              |
@@ -105,6 +110,7 @@ Feature: Manage Estimation Categories
       And I create the category
       Then I should see the error message "Title can't be blank"
 
+    @US-02-AC-02
     Scenario: Create duplicate category title
       Given I am logged in as a user "project-manager" with roles
         | role              |
@@ -130,6 +136,7 @@ Feature: Manage Estimation Categories
 
   Rule: Update estimation categories
 
+    @US-02-AC-03
     Scenario: Update estimation category title and type
       Given I am logged in as a user "project-manager" with roles
         | role              |
@@ -155,6 +162,7 @@ Feature: Manage Estimation Categories
       And I should see the category "Design & Planning" with type "Absolute"
       And I should not see the category "Conception"
 
+    @US-02-AC-03
     Scenario: Update category with empty title
       Given I am logged in as a user "project-manager" with roles
         | role              |
@@ -178,6 +186,7 @@ Feature: Manage Estimation Categories
       And I update the category
       Then I should see the error message "Title can't be blank"
 
+    @US-02-AC-03
     Scenario: Update category with duplicate title
       Given I am logged in as a user "project-manager" with roles
         | role              |
@@ -204,6 +213,7 @@ Feature: Manage Estimation Categories
 
   Rule: Delete estimation categories
 
+    @US-02-AC-04
     Scenario: Delete unused estimation category
       Given I am logged in as a user "project-manager" with roles
         | role              |

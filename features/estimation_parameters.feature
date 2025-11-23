@@ -1,4 +1,4 @@
-@javascript
+@javascript @US-03
 Feature: Manage Estimation Parameters
   As a project manager
   I want to manage estimation parameters for my project
@@ -11,6 +11,7 @@ Feature: Manage Estimation Parameters
 
   Rule: View estimation parameters
 
+    @US-03-AC-01
     Scenario: View all estimation parameters
       Given I am logged in as a user "project-manager" with roles
         | role            |
@@ -29,6 +30,7 @@ Feature: Manage Estimation Parameters
       And I should see the parameter "Team Size"
       And I should see the parameter "Complexity Factor"
 
+    @US-03-AC-01
     Scenario: View empty parameters list
       Given I am logged in as a user "project-manager" with roles
         | role            |
@@ -42,6 +44,7 @@ Feature: Manage Estimation Parameters
 
   Rule: Create estimation parameters
 
+    @US-03-AC-02
     Scenario: Create new estimation parameter
       Given I am logged in as a user "project-manager" with roles
         | role              |
@@ -60,6 +63,7 @@ Feature: Manage Estimation Parameters
       Then I should see a status message "Parameter was successfully created"
       And I should see the parameter "Number of Features"
 
+    @US-03-AC-02
     Scenario: Create parameter without title
       Given I am logged in as a user "project-manager" with roles
         | role              |
@@ -77,6 +81,7 @@ Feature: Manage Estimation Parameters
       And I create the parameter
       Then I should see the error message "Title can't be blank"
 
+    @US-03-AC-02
     Scenario: Create duplicate parameter title
       Given I am logged in as a user "project-manager" with roles
         | role              |
@@ -99,6 +104,7 @@ Feature: Manage Estimation Parameters
 
   Rule: Update estimation parameters
 
+    @US-03-AC-03
     Scenario: Update estimation parameter title
       Given I am logged in as a user "project-manager" with roles
         | role              |
@@ -121,6 +127,7 @@ Feature: Manage Estimation Parameters
       And I should see the parameter "Number of Developers"
       And I should not see the parameter "Team Size"
 
+    @US-03-AC-03
     Scenario: Update parameter with empty title
       Given I am logged in as a user "project-manager" with roles
         | role              |
@@ -141,6 +148,7 @@ Feature: Manage Estimation Parameters
       And I update the parameter
       Then I should see the error message "Title can't be blank"
 
+    @US-03-AC-03
     Scenario: Update parameter with duplicate title
       Given I am logged in as a user "project-manager" with roles
         | role              |
@@ -164,6 +172,7 @@ Feature: Manage Estimation Parameters
 
   Rule: Delete estimation parameters
 
+    @US-03-AC-04
     Scenario: Delete unused estimation parameter
       Given I am logged in as a user "project-manager" with roles
         | role              |
