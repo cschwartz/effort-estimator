@@ -42,35 +42,17 @@
     <div class="flex-1">
       <div id="current-effort-section">
         <% if @estimation_session.current_effort %>
-          <div id="effort-header" class="mb-6">
-            <h2 class="text-2xl font-bold"><%= @estimation_session.current_effort.title %></h2>
-            <p class="text-base-content/70"><%= @estimation_session.current_effort.description %></p>
-          </div>
+          <%= render EstimationSessionUi::CurrentEffortComponent.new(
+            effort: @estimation_session.current_effort
+          ) %>
 
           <div id="categories-container">
-            <% @estimation_session.effort_estimates.where(effort: @estimation_session.current_effort).includes(:category).order(:category_id).each do |estimate| %>
+            <% @current_effort_category_estimates.each do |estimate| %>
               <% is_active = !estimate.pending? %>
-              <div class="collapse <%= is_active ? 'collapse-open' : 'collapse-close' %> bg-base-200 mb-2"
-                   id="category-<%= estimate.category.title.parameterize %>">
-                <input type="checkbox" <%= 'checked' if is_active %> />
-                <div class="collapse-title text-xl font-medium">
-                  <%= estimate.category.title %>
-                  <% if is_active %>
-                    <%= render Display::BadgeComponent.new(
-                      label: "Active",
-                      variant: :success,
-                      css_class: "category-active-badge"
-                    ) %>
-                  <% end %>
-                  <%= render Display::BadgeComponent.new(
-                    label: estimate.status.humanize,
-                    variant: estimate.pending? ? :ghost : :primary
-                  ) %>
-                </div>
-                <div class="collapse-content">
-                  <p>Category estimation UI will be implemented in Phase 2</p>
-                </div>
-              </div>
+              <%= render EstimationSessionUi::CategoryCollapseComponent.new(
+                estimate: estimate,
+                is_active: is_active
+              ) %>
             <% end %>
           </div>
         <% else %>

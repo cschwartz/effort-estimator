@@ -2,6 +2,7 @@ class EstimationSessionsController < ApplicationController
   before_action :set_project
   before_action :set_estimation_session, except: [ :new, :create ]
   before_action :set_active_participants, only: [ :show ]
+  before_action :set_current_effort_category_estimates, only: [ :show ]
 
   def new
     @estimation_session = @project.build_estimation_session
@@ -31,6 +32,17 @@ class EstimationSessionsController < ApplicationController
 
   def set_active_participants
     @active_participants = @estimation_session.session_participants.where(status: :active).includes(:user)
+  end
+
+  def set_current_effort_category_estimates
+    if @estimation_session.current_effort
+      @current_effort_category_estimates = @estimation_session.effort_estimates
+        .where(effort: @estimation_session.current_effort)
+        .includes(:category)
+        .order(:category_id)
+    else
+      @current_effort_category_estimates = []
+    end
   end
 
   def set_project

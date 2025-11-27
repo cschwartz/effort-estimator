@@ -1,0 +1,45 @@
+<div class="collapse <%= collapse_state %> bg-base-200 mb-2"
+     id="category-<%= category.title.parameterize %>">
+  <input type="checkbox" <%= 'checked' if @is_active %> />
+  <div class="collapse-title text-xl font-medium">
+    <%= category.title %>
+    <% if @is_active %>
+      <%= render Display::BadgeComponent.new(
+        label: "Active",
+        variant: :success,
+        css_class: "category-active-badge"
+      ) %>
+    <% end %>
+    <%= render Display::BadgeComponent.new(
+      label: @estimate.status.humanize,
+      variant: status_badge_variant
+    ) %>
+  </div>
+  <div class="collapse-content">
+    <% if @is_active %>
+      <%= render EstimationSessionUi::StepsIndicatorComponent.new do |c| %>
+        <% if category.scaled? %>
+          <% c.with_step(
+            label: "Select Parameter",
+            css_class: step_css_class(:parameter_selection)
+          ) %>
+        <% end %>
+        <% c.with_step(
+          label: "Vote",
+          css_class: step_css_class(:voting)
+        ) %>
+        <% c.with_step(
+          label: "Reveal",
+          css_class: step_css_class(:revealed)
+        ) %>
+        <% c.with_step(
+          label: "Finalize",
+          css_class: step_css_class(:finalized)
+        ) %>
+      <% end %>
+      <div class="mt-4">
+        <p>Category estimation UI will be implemented in Phase 3-5</p>
+      </div>
+    <% end %>
+  </div>
+</div>

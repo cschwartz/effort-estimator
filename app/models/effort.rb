@@ -8,7 +8,7 @@ class Effort < ApplicationRecord
   validates :position, presence: true, numericality: { only_integer: true }
 
   def next_estimatable_effort
-    all_leaves = project.effort_leaves_in_dfs_order
+    all_leaves = project.effort_leaves
     current_index = all_leaves.index(self)
     all_leaves[current_index + 1] if current_index
   end

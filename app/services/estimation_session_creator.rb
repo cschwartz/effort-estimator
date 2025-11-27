@@ -80,9 +80,9 @@ class EstimationSessionCreator
   def create_effort_estimates
     return if @errors.any?
 
-    all_leaves = @project.effort_leaves_in_dfs_order
+    all_leaves = @project.effort_leaves
 
-    # Create estimates for all categories × all leaf efforts
+
     all_leaves.each do |effort|
       @project.categories.each do |category|
         estimate = @session.effort_estimates.build(
