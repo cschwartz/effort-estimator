@@ -2,11 +2,12 @@
 
 module Layout
   class FormViewComponent < ViewComponent::Base
-    attr_reader :record, :parent_resources
+    attr_reader :record, :parent_resources, :singular_resources
 
-    def initialize(record:, parent_resources: [])
+    def initialize(record:, parent_resources: [], singular_resources: [])
       @record = record
       @parent_resources = parent_resources
+      @singular_resources = singular_resources
     end
 
     def resource_class

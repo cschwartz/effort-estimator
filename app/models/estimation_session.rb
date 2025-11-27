@@ -14,4 +14,8 @@ class EstimationSession < ApplicationRecord
   validates :project_id, presence: true
   validates :estimation_option_id, presence: true
   validates :facilitator_id, presence: true
+
+  def title
+    "Estimation Session"
+  end
 end

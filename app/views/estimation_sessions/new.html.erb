@@ -1,0 +1,25 @@
+<div>
+  <%= render Layout::BreadcrumbsComponent.new(@project, @estimation_session, singular_resources: [EstimationSession]) %>
+  <div class="estimation_session">
+    <%= render Layout::PageHeaderComponent.new(@estimation_session) %>
+    <%= simple_form_for @estimation_session, url: project_estimation_session_path(@project), wrapper: :vertical_form do |f| %>
+      <%= render Forms::FormErrorsComponent.new(@estimation_session) %>
+
+      <div class="prose mb-4">
+        <h3>Start Estimation Session</h3>
+        <p>Select an estimation option to begin the collaborative estimation session for <%= @project.title %>.</p>
+      </div>
+
+      <%= f.association :estimation_option,
+                        collection: @estimation_options,
+                        label_method: :title,
+                        value_method: :id,
+                        wrapper: :vertical_select,
+                        include_blank: "Select estimation option...",
+                        input_html: { autofocus: true } %>
+
+      <%= link_to "Cancel", project_path(@project), class: "btn btn-warning" %>
+      <%= f.submit "Start Estimation Session", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

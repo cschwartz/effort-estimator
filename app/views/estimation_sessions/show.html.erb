@@ -1,0 +1,94 @@
+<%= turbo_stream_from @estimation_session %>
+<%= turbo_stream_from "session_participants" %>
+
+<div id="estimation-session-page" class="min-h-screen">
+  <!-- Session header -->
+  <div id="session-header" class="mb-6">
+    <%= render Layout::ShowViewComponent.new(
+      record: @estimation_session,
+      parent_resources: [@estimation_session.project],
+      singular_resources: [EstimationSession],
+      actions: [
+        button_to(
+          "Leave Session",
+          project_estimation_session_session_participant_path(@estimation_session.project, "placeholder"),
+          method: :delete,
+          form: { data: { turbo_confirm: "Are you sure you want to leave?" } },
+          class: "btn btn-warning btn-sm"
+        )
+      ]
+    ) do %>
+      <%= render Display::PropertyListComponent.new(wrapper: false) do |list| %>
+        <% list.with_property_badge(
+          label: "Status",
+          value: @estimation_session.status.humanize,
+          variant: case @estimation_session.status
+                   when "active" then :success
+                   when "completed" then :default
+                   else :ghost
+                   end
+        ) %>
+        <% list.with_property_text(
+          label: "Estimation Option",
+          value: @estimation_session.estimation_option.title
+        ) %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <!-- Main layout with sidebar on right -->
+  <div class="flex gap-4">
+    <!-- Main content area -->
+    <div class="flex-1">
+      <div id="current-effort-section">
+        <% if @estimation_session.current_effort %>
+          <div id="effort-header" class="mb-6">
+            <h2 class="text-2xl font-bold"><%= @estimation_session.current_effort.title %></h2>
+            <p class="text-base-content/70"><%= @estimation_session.current_effort.description %></p>
+          </div>
+
+          <div id="categories-container">
+            <% @estimation_session.effort_estimates.where(effort: @estimation_session.current_effort).includes(:category).order(:category_id).each do |estimate| %>
+              <% is_active = !estimate.pending? %>
+              <div class="collapse <%= is_active ? 'collapse-open' : 'collapse-close' %> bg-base-200 mb-2"
+                   id="category-<%= estimate.category.title.parameterize %>">
+                <input type="checkbox" <%= 'checked' if is_active %> />
+                <div class="collapse-title text-xl font-medium">
+                  <%= estimate.category.title %>
+                  <% if is_active %>
+                    <%= render Display::BadgeComponent.new(
+                      label: "Active",
+                      variant: :success,
+                      css_class: "category-active-badge"
+                    ) %>
+                  <% end %>
+                  <%= render Display::BadgeComponent.new(
+                    label: estimate.status.humanize,
+                    variant: estimate.pending? ? :ghost : :primary
+                  ) %>
+                </div>
+                <div class="collapse-content">
+                  <p>Category estimation UI will be implemented in Phase 2</p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="alert alert-warning">
+            <span>No efforts available for estimation</span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Sidebar with participants -->
+    <div class="w-120 flex-shrink-0">
+      <div id="participants-sidebar">
+        <%= render EstimationSessionUi::ParticipantListComponent.new(
+          participants: @active_participants,
+          facilitator: @estimation_session.facilitator
+        ) %>
+      </div>
+    </div>
+  </div>
+</div>

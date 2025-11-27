@@ -1,20 +1,14 @@
 <%= render Layout::ShowViewComponent.new(
   record: @project,
   actions: [
+    (link_to("View Estimation Session", project_estimation_session_path(@project), class: "btn btn-primary") if @project.estimation_session.present?),
+    (button_to("Join Estimation", project_estimation_session_session_participants_path(@project), method: :post, class: "btn btn-secondary") if @project.estimation_session.present?),
+    (link_to("Start Estimation", new_project_estimation_session_path(@project), class: "btn btn-primary") unless @project.estimation_session.present?),
     render(Actions::EditActionComponent.new(href: edit_project_path(@project), turbo_frame: dom_id(Project.new))),
     render(Actions::DeleteActionComponent.new(href: project_path(@project)))
-  ]
+  ].compact
 ) do %>
   <%= render Display::PropertyListComponent.new do |list| %>
     <% list.with_property_prose(label: "Description", value: @project.description, css_class: "description prose prose-sm max-w-none bg-base-200 rounded p-3") %>
   <% end %>
-
-  <div class="mt-4">
-    <% if @project.estimation_session.present? %>
-      <%= link_to "View Estimation Session", project_estimation_session_path(@project), class: "btn btn-primary" %>
-      <%= button_to "Join Estimation Session", project_estimation_session_session_participants_path(@project), method: :post, class: "btn btn-secondary" %>
-    <% else %>
-      <%= link_to "Start Estimation Session", new_project_estimation_session_path(@project), class: "btn btn-primary" %>
-    <% end %>
-  </div>
 <% end %>

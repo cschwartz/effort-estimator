@@ -19,6 +19,12 @@ Given('I am logged in as a user {string} with roles') do |username, table|
   visit root_path
 end
 
+# Multi-user session switching
+When(/^I am acting as the user "([^"]*)"$/) do |username|
+  expect(@is_multiuser_scenario).to be_truthy, "This step requires @multiuser tag on the scenario"
+  Capybara.session_name = username
+end
+
 # Navigation - generic for all resources using TableComponent
 When(/^I choose to create a new (category|parameter|project|estimation option)$/) do |resource|
   click_link "Create"

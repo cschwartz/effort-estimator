@@ -10,7 +10,7 @@ module Display
     attr_reader :label, :variant, :size, :css_class
 
     def badge_classes
-      classes = ["badge"]
+      classes = [ "badge" ]
       classes << "badge-#{size}" if size
       classes << variant_class
       classes << css_class if css_class

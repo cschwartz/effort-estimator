@@ -1,0 +1,25 @@
+<div class="card bg-base-100 shadow-sm">
+  <div class="card-body">
+    <h2 class="card-title">Participants</h2>
+
+    <ul id="session_participants" class="list bg-base-200 rounded-box">
+      <% @participants.each do |participant| %>
+        <li class="list-row participant-row" id="<%= dom_id(participant) %>">
+          <%= render Display::AvatarComponent.new(
+            user: participant.user,
+            modifier: :placeholder,
+            size: 8
+          ) %>
+          <span><%= participant.user.email %></span>
+          <% if is_facilitator?(participant) %>
+            <%= render Display::BadgeComponent.new(
+              label: "Facilitator",
+              variant: :primary,
+              size: :sm
+            ) %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

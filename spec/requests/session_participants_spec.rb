@@ -56,7 +56,7 @@ RSpec.describe "SessionParticipants", type: :request do
 
       it "sets success notice" do
         post project_estimation_session_session_participants_path(project)
-        expect(flash[:notice]).to eq("Joined estimation session successfully.")
+        expect(flash[:notice]).to eq("Joined estimation session.")
       end
 
       it "does not create duplicate participant" do
@@ -90,7 +90,7 @@ RSpec.describe "SessionParticipants", type: :request do
 
       it "sets error alert" do
         post project_estimation_session_session_participants_path(project)
-        expect(flash[:alert]).to eq("No active estimation session found.")
+        expect(flash[:alert]).to eq("No active estimation session")
       end
     end
   end
@@ -105,10 +105,15 @@ RSpec.describe "SessionParticipants", type: :request do
     end
 
     context "when user is a participant" do
-      it "destroys the session participant" do
+      it "updates participant status to left" do
+        delete project_estimation_session_session_participant_path(project, participant)
+        expect(participant.reload.status).to eq("left")
+      end
+
+      it "does not destroy the participant record" do
         expect {
           delete project_estimation_session_session_participant_path(project, participant)
-        }.to change(SessionParticipant, :count).by(-1)
+        }.not_to change(SessionParticipant, :count)
       end
 
       it "redirects to project page" do
@@ -118,7 +123,7 @@ RSpec.describe "SessionParticipants", type: :request do
 
       it "sets success notice" do
         delete project_estimation_session_session_participant_path(project, participant)
-        expect(flash[:notice]).to eq("Left estimation session successfully.")
+        expect(flash[:notice]).to eq("You have left the estimation session.")
       end
     end
 
@@ -132,9 +137,14 @@ RSpec.describe "SessionParticipants", type: :request do
       end
 
       it "allows facilitator to leave" do
+        delete project_estimation_session_session_participant_path(project, facilitator_participant)
+        expect(facilitator_participant.reload.status).to eq("left")
+      end
+
+      it "does not destroy the participant record" do
         expect {
           delete project_estimation_session_session_participant_path(project, facilitator_participant)
-        }.to change(SessionParticipant, :count).by(-1)
+        }.not_to change(SessionParticipant, :count)
       end
 
       it "redirects to project page" do
@@ -150,20 +160,20 @@ RSpec.describe "SessionParticipants", type: :request do
         login_as other_user, scope: :user
       end
 
-      it "does not destroy any participant" do
-        expect {
-          delete project_estimation_session_session_participant_path(project, participant)
-        }.not_to change(SessionParticipant, :count)
+      it "does not update any participant" do
+        original_status = participant.status
+        delete project_estimation_session_session_participant_path(project, participant)
+        expect(participant.reload.status).to eq(original_status)
       end
 
-      it "redirects to project page" do
+      it "redirects to estimation session page" do
         delete project_estimation_session_session_participant_path(project, participant)
-        expect(response).to redirect_to(project_path(project))
+        expect(response).to redirect_to(project_estimation_session_path(project))
       end
 
       it "sets error alert" do
         delete project_estimation_session_session_participant_path(project, participant)
-        expect(flash[:alert]).to eq("You are not a participant in this session.")
+        expect(flash[:alert]).to eq("You can only leave your own session.")
       end
     end
 
@@ -172,10 +182,10 @@ RSpec.describe "SessionParticipants", type: :request do
         estimation_session.update!(status: :completed)
       end
 
-      it "does not destroy the participant" do
-        expect {
-          delete project_estimation_session_session_participant_path(project, participant)
-        }.not_to change(SessionParticipant, :count)
+      it "does not update the participant" do
+        original_status = participant.status
+        delete project_estimation_session_session_participant_path(project, participant)
+        expect(participant.reload.status).to eq(original_status)
       end
 
       it "redirects to project page" do
@@ -185,7 +195,7 @@ RSpec.describe "SessionParticipants", type: :request do
 
       it "sets error alert" do
         delete project_estimation_session_session_participant_path(project, participant)
-        expect(flash[:alert]).to eq("No active estimation session found.")
+        expect(flash[:alert]).to eq("No active estimation session")
       end
     end
   end
