@@ -14,5 +14,13 @@ module EstimationSessionUi
     end
 
     renders_many :steps, StepComponent
+
+    def initialize(category:)
+      @category = category
+    end
+
+    def dom_id
+      "#{@category.title.parameterize}-steps"
+    end
   end
 end

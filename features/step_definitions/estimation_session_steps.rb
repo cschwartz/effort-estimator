@@ -64,8 +64,7 @@ end
 
 Then('I should see the category {string} is pending') do |category_title|
   within("#categories-container") do
-    category_card = find(".collapse", text: category_title)
-    expect(category_card).to have_css(".collapse-close")
+    category_card = find("#category-#{category_title.parameterize}")
     expect(category_card).to have_content("Pending")
   end
 end
@@ -74,5 +73,39 @@ Then('I should see the category {string} is finalized with value {string}') do |
   within("#categories-container") do
     category_card = find(".collapse", text: category_title)
     expect(category_card).to have_content("Final: #{value}")
+  end
+end
+
+# Parameter selection
+When('I select parameter {string} for category {string}') do |parameter_title, category_title|
+  within("#category-#{category_title.parameterize}") do
+    select parameter_title, from: "parameter_id"
+    click_button "Select Parameter"
+  end
+end
+
+Then('I should see parameter {string} selected for category {string}') do |parameter_title, category_title|
+  within("#category-#{category_title.parameterize}") do
+    expect(page).to have_content("per #{parameter_title}")
+  end
+end
+
+Then('the category {string} should be in voting state') do |category_title|
+  within("#category-#{category_title.parameterize}") do
+    within("##{category_title.parameterize}-steps") do
+      expect(page).to have_css(".step.step-primary", text: "Vote")
+    end
+  end
+end
+
+Then('I should see the parameter selector for category {string}') do |category_title|
+  within("#category-#{category_title.parameterize}") do
+    expect(page).to have_selector("select[name='parameter_id']")
+  end
+end
+
+Then('I should not see the parameter selector for category {string}') do |category_title|
+  within("#category-#{category_title.parameterize}") do
+    expect(page).not_to have_selector("select[name='parameter_id']")
   end
 end

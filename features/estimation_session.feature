@@ -97,7 +97,40 @@ Feature: Estimation Session
     Then I should see "alice@example.com" in the participants list
     And I should see "bob@example.com" in the participants list
 
-  @US-06-AC-04 @wip
+  @US-06-AC-05
+  Scenario: Facilitator selects parameter and all participants see update
+    Given I am logged in as a user "alice" with roles
+      | role                            |
+      | projects:list                   |
+      | projects:view                   |
+      | estimation_sessions:participate |
+      | estimation_sessions:facilitate  |
+    And I am logged in as a user "bob" with roles
+      | role                            |
+      | projects:list                   |
+      | projects:view                   |
+      | estimation_sessions:participate |
+    When I am acting as the user "alice"
+    And I visit the projects page
+    And I select the project "Web Redesign"
+    And I start the estimation with "Fibonacci" as the estimation option
+    And I am acting as the user "bob"
+    And I visit the projects page
+    And I select the project "Web Redesign"
+    And I join the estimation session
+    And I should not see the parameter selector for category "Implementation"
+    And I am acting as the user "alice"
+    Then I should see the parameter selector for category "Implementation"
+    And I select parameter "Number of Features" for category "Implementation"
+    And I should see parameter "Number of Features" selected for category "Implementation"
+    And I should not see the parameter selector for category "Implementation"
+    And the category "Implementation" should be in voting state
+    And I am acting as the user "bob"
+    And I should see parameter "Number of Features" selected for category "Implementation"
+    And I should not see the parameter selector for category "Implementation"
+    And the category "Implementation" should be in voting state
+
+  @US-06-AC-04
   Scenario: Viewing current effort node and category
     Given I am logged in as a user "alice" with roles
       | role                            |

@@ -1,0 +1,16 @@
+<div id="<%= category.title.parameterize %>-parameter-selector" class="mb-4">
+  <%= form_with url: select_parameter_project_estimation_session_path(@estimate.estimation_session.project),
+                method: :post,
+                data: { turbo_stream: true } do |f| %>
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Select Parameter for <%= category.title %></span>
+      </label>
+      <%= f.select :parameter_id,
+                   options_from_collection_for_select(@parameters, :id, :title, selected_parameter_id),
+                   { include_blank: "Select parameter..." },
+                   { class: "select select-bordered w-full", name: "parameter_id" } %>
+    </div>
+    <%= f.submit "Select Parameter", class: "btn btn-primary mt-2" %>
+  <% end %>
+</div>

@@ -11,7 +11,10 @@ Rails.application.routes.draw do
     resources :parameters
     resource :estimation_session, only: [ :show, :new, :create ] do
       resources :session_participants, only: [ :create, :destroy ], path: "participants"
-      resources :parameter_selections, only: [ :create ]
+
+      member do
+        post :select_parameter
+      end
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

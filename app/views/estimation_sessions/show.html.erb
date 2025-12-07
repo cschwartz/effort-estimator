@@ -1,6 +1,8 @@
+<% if @is_facilitator %>
+  <%= turbo_stream_from [ @estimation_session, :is_facilitator ] %>
+<% end %>
 <%= turbo_stream_from @estimation_session %>
 <%= turbo_stream_from "session_participants" %>
-
 <div id="estimation-session-page" class="min-h-screen">
   <!-- Session header -->
   <div id="session-header" class="mb-6">
@@ -35,7 +37,6 @@
       <% end %>
     <% end %>
   </div>
-
   <!-- Main layout with sidebar on right -->
   <div class="flex gap-4">
     <!-- Main content area -->
@@ -45,13 +46,14 @@
           <%= render EstimationSessionUi::CurrentEffortComponent.new(
             effort: @estimation_session.current_effort
           ) %>
-
           <div id="categories-container">
             <% @current_effort_category_estimates.each do |estimate| %>
               <% is_active = !estimate.pending? %>
               <%= render EstimationSessionUi::CategoryCollapseComponent.new(
                 estimate: estimate,
-                is_active: is_active
+                is_active: is_active,
+                is_facilitator: @estimation_session.facilitator == current_user,
+                parameters: @project_parameters
               ) %>
             <% end %>
           </div>
@@ -62,7 +64,6 @@
         <% end %>
       </div>
     </div>
-
     <!-- Sidebar with participants -->
     <div class="w-120 flex-shrink-0">
       <div id="participants-sidebar">

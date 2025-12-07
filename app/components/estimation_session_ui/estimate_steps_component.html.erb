@@ -1,0 +1,20 @@
+<%= render EstimationSessionUi::StepsIndicatorComponent.new(category: category) do |c| %>
+  <% if category.scaled? %>
+    <% c.with_step(
+      label: "Select Parameter",
+      css_class: step_css_class(:parameter_selection)
+    ) %>
+  <% end %>
+  <% c.with_step(
+    label: "Vote",
+    css_class: step_css_class(:voting)
+  ) %>
+  <% c.with_step(
+    label: "Reveal",
+    css_class: step_css_class(:revealed)
+  ) %>
+  <% c.with_step(
+    label: "Finalize",
+    css_class: step_css_class(:finalized)
+  ) %>
+<% end %>

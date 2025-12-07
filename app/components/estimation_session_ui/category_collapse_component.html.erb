@@ -17,28 +17,22 @@
   </div>
   <div class="collapse-content">
     <% if @is_active %>
-      <%= render EstimationSessionUi::StepsIndicatorComponent.new do |c| %>
-        <% if category.scaled? %>
-          <% c.with_step(
-            label: "Select Parameter",
-            css_class: step_css_class(:parameter_selection)
-          ) %>
-        <% end %>
-        <% c.with_step(
-          label: "Vote",
-          css_class: step_css_class(:voting)
-        ) %>
-        <% c.with_step(
-          label: "Reveal",
-          css_class: step_css_class(:revealed)
-        ) %>
-        <% c.with_step(
-          label: "Finalize",
-          css_class: step_css_class(:finalized)
-        ) %>
-      <% end %>
+      <%= render EstimationSessionUi::EstimateStepsComponent.new(estimate: @estimate) %>
+
       <div class="mt-4">
-        <p>Category estimation UI will be implemented in Phase 3-5</p>
+        <%= render EstimationSessionUi::ParameterSelectorComponent.new(
+          estimate: @estimate,
+          parameters: @parameters,
+          is_facilitator: @is_facilitator
+        ) %>
+
+        <div id="<%= category.title.parameterize %>-parameter-display">
+          <%= render EstimationSessionUi::ParameterDisplayComponent.new(
+            estimate: @estimate
+          ) %>
+        </div>
+
+        <p>Voting UI will be implemented in Phase 4-5</p>
       </div>
     <% end %>
   </div>
