@@ -73,7 +73,7 @@ group :development do
   gem "lookbook"
 end
 
-gem "simple_form", "~> 5.3"
+gem "simple_form", "~> 5.4"
 gem "closure_tree"
 
 gem "tailwindcss-ruby", "~> 4.1"
